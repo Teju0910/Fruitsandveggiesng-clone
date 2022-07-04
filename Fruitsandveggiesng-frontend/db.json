@@ -1,0 +1,104 @@
+{
+  "fruits": [
+    {
+      "id": 1,
+      "type": "fruits",
+      "name": "Apple",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Red_Apple.jpg/265px-Red_Apple.jpg",
+      "mrp": 50,
+      "save": 20,
+      "price": 35,
+      "weight": 1,
+      "quantity": 1,
+      "isfavoutite": false
+    },
+    {
+      "id": 2,
+      "type": "fruits",
+      "name": "Banana",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Bananas_white_background_DS.jpg/320px-Bananas_white_background_DS.jpg",
+      "mrp": 50,
+      "price": 12,
+      "save": 20,
+      "weight": 1,
+      "quantity": 1,
+      "isfavoutite": false
+    },
+    {
+      "id": 3,
+      "name": "Grapes",
+      "type": "fruits",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Table_grapes_on_white.jpg/320px-Table_grapes_on_white.jpg",
+      "mrp": 50,
+      "price": 12,
+      "save": 20,
+      "weight": 1,
+      "quantity": 1,
+      "isfavoutite": false
+    },
+    {
+      "id": 4,
+      "name": "Pineapple",
+      "type": "fruits",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Pineapple_and_cross_section.jpg/286px-Pineapple_and_cross_section.jpg",
+      "mrp": 50,
+      "price": 200,
+      "save": 20,
+      "weight": 1,
+      "quantity": 0.5,
+      "isfavoutite": false
+    }
+  ],
+  "cartdata": [
+    {
+      "id": 2,
+      "name": "Banana",
+      "type": "fruits",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Bananas_white_background_DS.jpg/320px-Bananas_white_background_DS.jpg",
+      "mrp": 50,
+      "price": 12,
+      "save": 20,
+      "weight": 1,
+      "quantity": 1,
+      "isfavoutite": false
+    },
+    {
+      "id": 1,
+      "name": "Apple",
+      "type": "fruits",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Red_Apple.jpg/265px-Red_Apple.jpg",
+      "mrp": 50,
+      "save": 20,
+      "price": 35,
+      "weight": 1,
+      "quantity": 1,
+      "isfavoutite": false
+    },
+    {
+      "id": 4,
+      "name": "Pineapple",
+      "type": "fruits",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Pineapple_and_cross_section.jpg/286px-Pineapple_and_cross_section.jpg",
+      "mrp": 50,
+      "price": 200,
+      "save": 20,
+      "weight": 1,
+      "quantity": 0.5,
+      "isfavoutite": false
+    }
+  ],
+  "wishlist": [
+    {
+      "id": 3,
+      "type": "fruits",
+      "name": "Grapes",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Table_grapes_on_white.jpg/320px-Table_grapes_on_white.jpg",
+      "mrp": 50,
+      "price": 12,
+      "save": 20,
+      "weight": 1,
+      "quantity": 1,
+      "isfavoutite": false
+    }
+  ]
+}
