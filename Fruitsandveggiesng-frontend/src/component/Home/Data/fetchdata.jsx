@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Alert, WishAlert } from "../../Products/Minicomponents";
 
 export const getdata = async (setdata) => {
   await axios({
@@ -33,7 +34,7 @@ export const addtocart = async (pro) => {
     method: "post",
     data: pro,
   })
-    .then((res) => {     
+    .then((res) => {
       alert("Added To Cart");
     })
     .catch((err) => {
@@ -104,7 +105,8 @@ export const addtowishlist = async (pro) => {
   })
     .then((res) => {
       //   console.log(res);
-      alert("Added To Favourite");
+      alert("Added in Favourite");
+      // <WishAlert />;
     })
     .catch((err) => {
       alert("Already Added in Favourite");

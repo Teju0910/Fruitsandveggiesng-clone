@@ -1,4 +1,4 @@
-import { Flex, Grid } from "@chakra-ui/react";
+import { Flex, Grid, Stack } from "@chakra-ui/react";
 import Fruits from "./Fruits/Fruits";
 import { useContext, useEffect, useState } from "react";
 import { getdata } from "../Home/Data/fetchdata";
@@ -12,7 +12,7 @@ export default function Product() {
   const [SearchParams] = useSearchParams();
   console.log(SearchParams, "SearchParams");
   const products = useSelector((state) => state.Fruits.fruits);
- 
+
   useEffect(() => {
     if (products.length == 0) {
       let params = {
@@ -24,7 +24,6 @@ export default function Product() {
 
   return (
     <Flex
-      direction="column"
       justifyContent="center"
       maxW={{ xl: "1200px" }}
       pt={150}
@@ -32,10 +31,11 @@ export default function Product() {
       minH="100vh"
     >
       <FilterComponent />
+
       <Grid
         w="full"
         gridGap="5"
-        gridTemplateColumns="repeat( auto-fit, minmax(300px, 1fr) )"
+        gridTemplateColumns="repeat( auto-fit, minmax(250px, 1fr) )"
       >
         {products.map((p) => (
           <Fruits

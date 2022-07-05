@@ -18,7 +18,7 @@ export const Wishbtn = ({ id }) => {
   }, [wish]);
 
   return (
-    <Box zIndex="15" width="50px">
+    <Box zIndex="15" width="40px">
       {!wish ? (
         <img
           _hover={{

@@ -104,12 +104,21 @@ const SingleProduct = () => {
         </Box>
         <Box p={10} textAlign="center" justifyContent="center">
           <Flex>
-            <Heading as="h1" size="2xl" id="title" p={8} color="purple">
+            <Heading
+              as="h1"
+              size="2xl"
+              id="title"
+              fontFamily="'Finger Paint', cursive"
+              p={8}
+              textTransform={"uppercase"}
+            >
               {pro.name}
             </Heading>
             <Wishbtn id={pro.id} />
           </Flex>
-
+          <Heading as="h6" size="sm" m={3} className="mrp">
+            MRP : Rs.{pro.mrp}
+          </Heading>
           <Heading as="h6" size="sm" m={3} className="mrp">
             MRP : Rs.{pro.mrp}
           </Heading>

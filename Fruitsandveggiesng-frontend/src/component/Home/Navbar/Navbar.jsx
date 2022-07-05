@@ -62,9 +62,8 @@ function Navbar() {
     { title: "About F & V", to: "/about" },
     { title: "Services", to: "/services" },
     { title: "Products" },
-    { title: "News & Gallery", to: "/gallery" },
+    { title: "News & Gallery", to: "/newsandgallery" },
     { title: `Contact Us`, to: "/contact" },
-    { title: "Support", to: "/support" },
   ];
 
   const handleChange = (event, newValue) => {
@@ -114,9 +113,15 @@ function Navbar() {
                 mt={3}
                 onChange={handelchange}
               >
-                <option value="/fruits">Fresh Fruits</option>
-                <option value="/vegetables">Vegetables</option>
-                <option value="/HerbsandSpices">Herbs and Spices</option>
+                <option p={5} value="/fruits">
+                  Fresh Fruits
+                </option>
+                <option p={2} value="/vegetables">
+                  Vegetables
+                </option>
+                <option p={2} value="/HerbsandSpices">
+                  Herbs and Spices
+                </option>
               </Select>
             ) : (
               <Tab p={5}>
