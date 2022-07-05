@@ -13,7 +13,7 @@ import {
   Avatar,
   MenuItem,
   DrawerContent,
-  DrawerCloseButton,
+  Text,
   useDisclosure,
   DrawerOverlay,
   ButtonGroup,
@@ -106,23 +106,34 @@ function Navbar() {
         <TabList>
           {navigation.map((e) =>
             e.title === "Products" ? (
-              <Select
-                placeholder={e.title}
-                w={150}
-                border="none"
-                mt={3}
-                onChange={handelchange}
-              >
-                <option p={5} value="/fruits">
-                  Fresh Fruits
-                </option>
-                <option p={2} value="/vegetables">
-                  Vegetables
-                </option>
-                <option p={2} value="/HerbsandSpices">
-                  Herbs and Spices
-                </option>
-              </Select>
+              <Tab>
+                <Menu colorScheme={"purple"}>
+                  <MenuButton
+                    alignItems={"center"}
+                    // as={Button}
+                    rounded={"full"}
+                    variant={"link"}
+                    cursor={"pointer"}
+                    minW={0}
+                  >
+                    <Text>Products</Text>
+                  </MenuButton>
+                  <MenuList alignItems="start">
+                    <MenuItem>
+                      <Link to="/products">All</Link>
+                    </MenuItem>
+                    <MenuItem>
+                      <Link to="/products">Fresh Fruits</Link>
+                    </MenuItem>
+                    <MenuItem>
+                      <Link to="/products">Vegetables</Link>
+                    </MenuItem>
+                    <MenuItem>
+                      <Link to="/products">Herbs and Spices</Link>
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
+              </Tab>
             ) : (
               <Tab p={5}>
                 <Link to={e.to}> {e.title}</Link>
@@ -193,7 +204,8 @@ function Navbar() {
             ) : (
               <Menu colorScheme={"purple"}>
                 <MenuButton
-                  as={Button}
+                  alignItems={"center"}
+                  // as={Button}
                   rounded={"full"}
                   variant={"link"}
                   cursor={"pointer"}

@@ -4,23 +4,20 @@ import { useContext, useEffect, useState } from "react";
 import { getdata } from "../Home/Data/fetchdata";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchFruits } from "../../Redux/Fruits/action";
-import { useSearchParams } from "react-router-dom";
+
 import { FilterComponent } from "./FilterComponent";
 
 export default function Product() {
   const dispatch = useDispatch();
-  const [SearchParams] = useSearchParams();
-  console.log(SearchParams, "SearchParams");
+  const filt = useSelector((state) => state.Filter.filter);
   const products = useSelector((state) => state.Fruits.fruits);
-
+  // const filt = useSelector((state) => state.Filter.filter);
+  console.log(filt, "sotrese");
   useEffect(() => {
     if (products.length == 0) {
-      let params = {
-        type: SearchParams.getAll("type"),
-      };
-      dispatch(fetchFruits(params));
+      dispatch(fetchFruits(filt));
     }
-  }, [dispatch, products.length, SearchParams]);
+  }, [dispatch, products.length, filt]);
 
   return (
     <Flex

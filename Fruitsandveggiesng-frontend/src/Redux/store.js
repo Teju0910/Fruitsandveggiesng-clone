@@ -3,9 +3,11 @@ import { FruitsReducer } from "./Fruits/reducer";
 
 import thunk from "redux-thunk";
 import { CartReducer } from "./Cart/reducer";
+import { FilterReducer } from "./Filter/reducer";
 
 const rootReducers = combineReducers({
     Fruits: FruitsReducer,
+    Filter: FilterReducer,
     Cart: CartReducer
 })
 

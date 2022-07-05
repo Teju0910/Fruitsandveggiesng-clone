@@ -10,7 +10,7 @@ import { Box } from "@chakra-ui/react";
 export const Wishbtn = ({ id }) => {
   const [wish, setwish] = useState(false);
   const [pro, setpro] = useState({});
-  console.log(pro, "p");
+  // console.log(pro, "p");
 
   useEffect(() => {
     modifiywishlist(pro.id, wish);

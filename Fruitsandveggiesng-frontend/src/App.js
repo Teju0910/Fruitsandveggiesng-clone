@@ -21,9 +21,9 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />}></Route>
                 <Route path="/userprofile" element={<UserProfile />}></Route>
-                <Route path="/fruits" element={<Product />}></Route>
-                <Route path="/vegetables" element={<Product />}></Route>
-                <Route path="/HerbsandSpices" element={<Product />}></Route>
+                <Route path="/products" element={<Product />}></Route>
+                <Route path="/products/:fruits" element={<Product />}></Route>
+                {/* <Route path="/HerbsandSpices" element={<Product />}></Route> */}
                 <Route path="/fruits/:id" element={<SingleProduct />}></Route>
                 <Route path="/wishlist" element={<WishList />}></Route>
                 <Route path="/cart" element={<CartData />}></Route>

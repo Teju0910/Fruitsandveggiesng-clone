@@ -20,6 +20,7 @@ export const getdataFailure = () => ({
 });
 
 export const fetchFruits = (payload) => (dispatch) => {
+    console.log(payload, "paylos")
     const getdataActionreq = getdataRequest();
     dispatch(getdataActionreq);
     // console.log(`token is`, getState().auth.token);
@@ -27,7 +28,7 @@ export const fetchFruits = (payload) => (dispatch) => {
         url: "http://localhost:8080/fruits",
         method: "GET",
         params: {
-            ...payload
+            categories: payload
         }
     })
         .then((res) => {

@@ -5,6 +5,9 @@ export const getdata = async (setdata) => {
   await axios({
     url: "http://localhost:8080/fruits",
     method: "get",
+    params: {
+      q: "Fruits",
+    },
   })
     .then((res) => {
       setdata(res.data);
