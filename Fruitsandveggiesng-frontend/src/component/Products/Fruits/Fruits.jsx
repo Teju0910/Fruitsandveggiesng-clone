@@ -7,17 +7,10 @@ import {
   Text,
   Center,
 } from "@chakra-ui/react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Wishbtn } from "../Wishbtn";
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { useContext, useEffect, useState } from "react";
-import { FaLessThanEqual } from "react-icons/fa";
 
 const Fruits = ({ id, name, image, price }) => {
-  const filt = useSelector((state) => state.Filter.filter);
-  var filterfruits = JSON.parse(localStorage.getItem("filterfruits"));
-
   return (
     <Stack
       width={280}
@@ -59,7 +52,7 @@ const Fruits = ({ id, name, image, price }) => {
           </Box> */}
           <Center mt={3}>
             <Wishbtn id={id} />
-            <Link to={`/products/categories=${filterfruits}/${id}`}>
+            <Link to={`/fruits/${id}`}>
               <Text as="u" ml={15} color={"blue"} _hover={{ color: "green" }}>
                 See more
               </Text>

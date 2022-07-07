@@ -11,8 +11,8 @@ export default function Product() {
   const dispatch = useDispatch();
   const filt = useSelector((state) => state.Filter.filter);
   const products = useSelector((state) => state.Fruits.fruits);
-  // console.log(filt, "sotrese");
-
+  // const filt = useSelector((state) => state.Filter.filter);
+  console.log(filt, "sotrese");
   useEffect(() => {
     if (products.length == 0) {
       dispatch(fetchFruits(filt));

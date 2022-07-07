@@ -21,7 +21,7 @@ import "./SingleProduct.css";
 import { Wishbtn } from "../Wishbtn";
 import { CartContext } from "../../../context/CartContext";
 import { useDispatch } from "react-redux";
-import { addtoCart, updateqtychrt } from "../../../Redux/Cart/action";
+import { addtoCart } from "../../../Redux/Cart/action";
 
 const SingleProduct = () => {
   const [pro, setpro] = useState([]);
@@ -31,7 +31,6 @@ const SingleProduct = () => {
 
   const { id } = useParams();
 
-  console.log(id, "idrt");
   useEffect(() => {
     getsingleData();
   }, [wish]);
@@ -54,6 +53,7 @@ const SingleProduct = () => {
       return;
     }
     setqty((prev) => prev + value);
+    // updatecartqty(value, id);
   };
   return (
     <Box
@@ -108,22 +108,16 @@ const SingleProduct = () => {
               as="h1"
               size="2xl"
               id="title"
-              fontFamily="cursive"
+              fontFamily="'Finger Paint', cursive"
               p={8}
               textTransform={"uppercase"}
             >
               {pro.name}
             </Heading>
-            <Wishbtn mt={30} id={pro.id} />
+            <Wishbtn id={pro.id} />
           </Flex>
-          <Heading
-            color={"#35AF6A"}
-            textTransform="uppercase"
-            as="h6"
-            size="sm"
-            m={3}
-          >
-            Category : {pro.categories}
+          <Heading as="h6" size="sm" m={3} className="mrp">
+            MRP : Rs.{pro.mrp}
           </Heading>
           <Heading as="h6" size="sm" m={3} className="mrp">
             MRP : Rs.{pro.mrp}
@@ -137,6 +131,7 @@ const SingleProduct = () => {
 
           <Center p={3}>
             <IconButton
+              aria-label="Add to friends"
               onClick={() => handleQty(1, qty)}
               icon={<FiPlus />}
               m={3}
@@ -144,6 +139,7 @@ const SingleProduct = () => {
             <Text fontSize="xl">{qty}</Text>
             <IconButton
               m={3}
+              aria-label="Add to friends"
               onClick={() => handleQty(-1, qty)}
               icon={<FiMinus />}
             />
@@ -160,12 +156,7 @@ const SingleProduct = () => {
             width="200px"
             bg="#0BC5EA"
             _hover={{ bg: "#f30000", color: "white" }}
-            onClick={() =>
-              dispatch(addtoCart(pro)).then(() => {
-               
-                dispatch(updateqtychrt({ id, qty }));
-              })
-            }
+            onClick={() => dispatch(addtoCart(pro))}
           >
             Add to Cart
           </Button>

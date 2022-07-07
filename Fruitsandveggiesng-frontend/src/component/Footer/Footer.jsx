@@ -51,6 +51,14 @@ const SocialButton = ({ children, label, href }) => {
   );
 };
 
+const ListHeader = () => {
+  return (
+    <Text fontWeight={"500"} fontSize={"lg"} mb={2}>
+      {"children"}
+    </Text>
+  );
+};
+
 export default function Footer() {
   return (
     <Box pt={150} bg="black" color="white">
@@ -107,12 +115,12 @@ export default function Footer() {
             <Heading>Photos</Heading>
             <Stack direction={"row"}>
               {images1.map((e) => (
-                <Image key={e} src={e} boxSize="100px" />
+                <Image src={e} boxSize="100px" />
               ))}
             </Stack>
             <Stack direction={"row"}>
               {images2.map((e) => (
-                <Image key={e} src={e} boxSize="100px" />
+                <Image src={e} boxSize="100px" />
               ))}
             </Stack>
           </Stack>

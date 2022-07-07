@@ -12,9 +12,11 @@ import {
 import { Link } from "react-router-dom";
 import { ImCross } from "react-icons/im";
 
+import { useContext, useEffect } from "react";
+
+
 // const Fruits = ({ image, name, price }) => {
-const SingleCart = ({ data }) => {
-  console.log(data.name, "..");
+const SingleCart = ({ id, name, image, price }) => {
   return (
     <Stack
       width={300}
@@ -36,13 +38,7 @@ const SingleCart = ({ data }) => {
           // deletecart(id);
         }}
       />
-      <Image
-        src={data.image}
-        alt=""
-        ml={10}
-        height={200}
-        justifyContent="center"
-      />
+      <Image src={image} alt="" ml={10} height={200} justifyContent="center" />
 
       <Box>
         <Heading
@@ -54,17 +50,17 @@ const SingleCart = ({ data }) => {
             color: " #057a72b8",
           }}
         >
-          {data.name}
+          {name}
         </Heading>
         <Box>
-          Rate - {data.price}
-          <Box color="gray.600" fontSize="sm">
+          Rate - {price}
+          <Box as="span" color="gray.600" fontSize="sm">
             / unit
           </Box>
           <Center>
-            {/* <Link to={`/fruits/${data.id}`}>
+            <Link to={`/fruits/${id}`}>
               <Button variant="ghost">See more</Button>
-            </Link> */}
+            </Link>
           </Center>
         </Box>
       </Box>
