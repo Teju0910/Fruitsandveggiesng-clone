@@ -10,16 +10,16 @@ export const CartContextProvider = ({ children }) => {
   const [cart, setcart] = useState([]);
   const [total, settotal] = useState(0);
 
-  useEffect(() => {
-    getcartdata(setcart, setcartcount);
-    cart.map((e) => {
-      settotal((prev) => prev + e.price);
-    });
-  }, []);
+  // useEffect(() => {
+  //   getcartdata(setcart, setcartcount);
+  //   cart.map((e) => {
+  //     settotal((prev) => prev + e.price);
+  //   });
+  // }, []);
 
   return (
     <CartContext.Provider
-      value={{ deletecart, addtocart, cart, cartcount, total }}
+      // value={{ deletecart, addtocart, cart, cartcount, total }}
     >
       {children}
     </CartContext.Provider>

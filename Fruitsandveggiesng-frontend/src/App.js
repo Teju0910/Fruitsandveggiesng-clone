@@ -9,9 +9,12 @@ import CartData from "./component/Cart/CartData";
 import Services from "./component/Home/Services/Services"
 import UserProfile from "./component/UserProfile/UserProfile";
 import News from "./component/News/News";
-import { ImGoogle } from "react-icons/im";
+
+import { useDispatch, useSelector } from "react-redux";
 
 function App() {
+    const filt = useSelector((state) => state.Filter.filter);
+
     const top = {
         marginTop: 130
     }
@@ -22,9 +25,7 @@ function App() {
                 <Route path="/" element={<Home />}></Route>
                 <Route path="/userprofile" element={<UserProfile />}></Route>
                 <Route path="/products" element={<Product />}></Route>
-                <Route path="/products/:fruits" element={<Product />}></Route>
-                {/* <Route path="/HerbsandSpices" element={<Product />}></Route> */}
-                <Route path="/fruits/:id" element={<SingleProduct />}></Route>
+                <Route path="/products/:categories/:id" element={<SingleProduct />}></Route>
                 <Route path="/wishlist" element={<WishList />}></Route>
                 <Route path="/cart" element={<CartData />}></Route>
                 <Route path="/newsandgallery" element={<News />}></Route>

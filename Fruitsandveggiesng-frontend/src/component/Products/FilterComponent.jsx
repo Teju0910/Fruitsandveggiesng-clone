@@ -17,9 +17,10 @@ export const FilterComponent = () => {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const [filter, setfilter] = useState("");
-  console.log(filter);
+
   const searchHandler = () => {
     let search;
+    localStorage.setItem("filterfruits", JSON.stringify(filter));
     if (filter) {
       search = {
         categories: filter,
@@ -33,8 +34,8 @@ export const FilterComponent = () => {
 
   useEffect(() => {
     searchHandler();
-    dispatch(fetchFruits(filter));
-    dispatch(getdataSuccess(filter));
+    dispatch(fetchFruits({ filter }));
+    dispatch(getdataSuccess({ filter }));
   }, [filter, searchParams]);
   return (
     <Box w={400} m={30}>
@@ -58,19 +59,40 @@ export const FilterComponent = () => {
         >
           PRODUCT CATEGORIES
         </Heading>
-        <Text p={2} value="" onClick={() => setfilter("")}>
+        <Text
+          _hover={{ color: "red", cursor: "pointer" }}
+          _active={{ color: "blue", cursor: "pointer" }}
+          p={2}
+          value=""
+          onClick={() => setfilter("")}
+        >
           All (5)
         </Text>
         <hr></hr>
-        <Text p={2} onClick={() => setfilter("Fruits")}>
+        <Text
+          _hover={{ color: "red", cursor: "pointer" }}
+          _active={{ color: "blue", cursor: "pointer" }}
+          p={2}
+          onClick={() => setfilter("Fruits")}
+        >
           Fruits (5)
         </Text>
         <hr></hr>
-        <Text p={2} onClick={() => setfilter("HerbsandSpices")}>
+        <Text
+          _hover={{ color: "red", cursor: "pointer" }}
+          _active={{ color: "blue", cursor: "pointer" }}
+          p={2}
+          onClick={() => setfilter("HerbsandSpices")}
+        >
           Herbs and Spices (3)
         </Text>
         <hr></hr>
-        <Text p={2} onClick={() => setfilter("Vegetables")}>
+        <Text
+          _hover={{ color: "red", cursor: "pointer" }}
+          _active={{ color: "blue", cursor: "pointer" }}
+          p={2}
+          onClick={() => setfilter("Vegetables")}
+        >
           Vegetables (3)
         </Text>
         <hr></hr>

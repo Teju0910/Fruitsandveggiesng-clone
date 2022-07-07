@@ -18,6 +18,7 @@ import {
   DrawerOverlay,
   ButtonGroup,
 } from "@chakra-ui/react";
+import { useDispatch, useSelector } from "react-redux";
 import { VscAccount, VscSearch } from "react-icons/vsc";
 import { BsEmojiHeartEyes } from "react-icons/bs";
 import styled from "styled-components";
@@ -29,6 +30,10 @@ import { CartContext } from "../../../context/CartContext";
 import Signin from "../Signin/Signin";
 import Signup from "../Signup/Signup";
 import { BsPerson } from "react-icons/bs";
+import { useSearchParams } from "react-router-dom";
+import { fetchFruits } from "../../../Redux/Fruits/action";
+import { getdataSuccess } from "../../../Redux/Filter/action";
+import { fetchCart } from "../../../Redux/Cart/action";
 
 const Nav = styled.div`
   top: 0;
@@ -43,19 +48,42 @@ const Nav = styled.div`
 function Navbar() {
   const [value, setValue] = useState("one");
   const [favcount, setfavcount] = useState(0);
+  // const [cartcount, setcartcount] = useState([]);
   const [favourite, setfavourite] = useState([]);
-  // const { cart, cartcount, total } = useContext(CartContext);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [filter, setfilter] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [hide, sethide] = useState(true);
   const btnRef = React.useRef();
   const cancelRef = React.useRef();
+  const dispatch = useDispatch();
   let token = "qwe";
   let reduxtoken = "qswe";
   // let token = "";
   // let reduxtoken = "";
+  const cartcount = useSelector((state) => state.Cart.cart);
+  console.log(cartcount, "carts");
+  
+  const searchHandler = () => {
+    let search;
+    if (filter) {
+      search = {
+        categories: filter,
+      };
+    } else {
+      search = undefined;
+    }
+
+    setSearchParams(search, { replace: true });
+  };
+
   useEffect(() => {
+    // searchHandler();
+    dispatch(fetchFruits({ filter }));
+    // dispatch(fetchCart());
+    dispatch(getdataSuccess({ filter }));
     getwishlistdata(setfavourite, setfavcount);
-  }, [setfavcount]);
+  }, [setfavcount, filter]);
 
   const navigation = [
     { title: "Home", to: "/" },
@@ -69,13 +97,6 @@ function Navbar() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const navigate = useNavigate();
-
-  const handelchange = (e) => {
-    console.log(e.target.value);
-    navigate(e.target.value);
-  };
-  // console.log(hide);
 
   const handelhideshow = () => {
     sethide(!hide);
@@ -90,12 +111,8 @@ function Navbar() {
         />
       </Tabs>
       <Tabs
-        // _selected = {
-        //   borderColor= "red"
-        // }
         colorScheme="purple"
         variant="enclosed"
-        // borderColor= "red.400"
         value={value}
         onChange={handleChange}
         textColor="secondary"
@@ -108,28 +125,28 @@ function Navbar() {
             e.title === "Products" ? (
               <Tab>
                 <Menu colorScheme={"purple"}>
-                  <MenuButton
-                    alignItems={"center"}
-                    // as={Button}
-                    rounded={"full"}
-                    variant={"link"}
-                    cursor={"pointer"}
-                    minW={0}
-                  >
-                    <Text>Products</Text>
-                  </MenuButton>
+                  <Link to="/products">
+                    <MenuButton
+                      alignItems={"center"}
+                      // as={Button}
+                      rounded={"full"}
+                      variant={"link"}
+                      cursor={"pointer"}
+                      minW={0}
+                    >
+                      Products
+                    </MenuButton>
+                  </Link>
                   <MenuList alignItems="start">
-                    <MenuItem>
-                      <Link to="/products">All</Link>
+                    <MenuItem onClick={() => setfilter("")}>All</MenuItem>
+                    <MenuItem onClick={() => setfilter("Fruits")}>
+                      Fresh Fruits
                     </MenuItem>
-                    <MenuItem>
-                      <Link to="/products">Fresh Fruits</Link>
+                    <MenuItem onClick={() => setfilter("Vegetables")}>
+                      Vegetables
                     </MenuItem>
-                    <MenuItem>
-                      <Link to="/products">Vegetables</Link>
-                    </MenuItem>
-                    <MenuItem>
-                      <Link to="/products">Herbs and Spices</Link>
+                    <MenuItem onClick={() => setfilter("HerbsandSpices")}>
+                      Herbs and Spices
                     </MenuItem>
                   </MenuList>
                 </Menu>
@@ -144,14 +161,14 @@ function Navbar() {
           <Tab>
             <Icon as={VscSearch} />
           </Tab>
-          {/* <Tab>
+          <Tab>
             <Link to="/cart">
               <div className="header-cart">
                 <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" />
                 <span>{cartcount}</span>
               </div>
             </Link>
-          </Tab> */}
+          </Tab>
           <Tab>
             <Link to="/wishlist">
               <div className="header-cart">
