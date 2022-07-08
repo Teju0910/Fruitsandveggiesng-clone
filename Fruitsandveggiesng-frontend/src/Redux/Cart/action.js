@@ -9,65 +9,84 @@ export const CartActions = {
     POST_CART_FAILURE: "POST_CART_FAILURE",
 };
 
-export const getdataRequest = () => ({
+export const getcartRequest = () => ({
     type: CartActions.GET_CART_REQUEST
 });
 
-export const getdataSuccess = (data) => ({
+export const getcartSuccess = (cart) => ({
     type: CartActions.GET_CART_SUCCESS,
-    payload: data
+    payload: cart
 });
 
-export const getdataFailure = () => ({
+export const getcartFailure = () => ({
     type: CartActions.GET_CART_FAILURE
 });
 
 export const fetchCart = () => (dispatch) => {
-    const getdataActionreq = getdataRequest();
-    dispatch(getdataActionreq);
-    // console.log(`token is`, getState().auth.token);
+    console.log("hi")
+    const getcartActionreq = getcartRequest();
+    dispatch(getcartActionreq);
+
     return axios({
         url: "http://localhost:8080/cartdata",
         method: "GET",
     })
         .then((res) => {
-            const getdataActionres = getdataSuccess(res.data);
-            dispatch(getdataActionres);
+            // console.log(res.data, "res")
+            const getcartActionres = getcartSuccess(res.data);
+            dispatch(getcartActionres);
         })
         .catch((err) => {
-            const getdataActionerr = getdataFailure();
-            dispatch(getdataActionerr);
+            const getcartActionerr = getcartFailure();
+            dispatch(getcartActionerr);
+            console.log(err, "err")
         });
 };
 
 
-export const postdataRequest = () => ({
+export const postcartRequest = () => ({
     type: CartActions.POST_CART_REQUEST
 });
 
-export const postdataSuccess = (data) => ({
+export const postcartSuccess = (data) => ({
     type: CartActions.POST_CART_SUCCESS,
     payload: data
 });
 
-export const postdataFailure = () => ({
+export const postcartFailure = () => ({
     type: CartActions.POST_CART_FAILURE
 });
 
 export const addtoCart = (payload) => (dispatch) => {
-    const postdataActionreq = postdataRequest();
-    dispatch(postdataActionreq);
-    return axios.post("http://localhost:8080/cartdata", payload)
+    const postcartActionreq = postcartRequest();
+    dispatch(postcartActionreq);
+    return axios.post("http://localhost:8080/cartcart", payload)
         .then((res) => {
-            const postdataActionres = postdataSuccess(res.data);
-            dispatch(postdataActionres);
+            const postcartActionres = postcartSuccess(res.cart);
+            dispatch(postcartActionres);
         })
         .then(() => alert("Added to cart"))
         .catch((err) => {
-            const postdataActionerr = postdataFailure();
-            dispatch(postdataActionerr);
+            const postcartActionerr = postcartFailure();
+            dispatch(postcartActionerr);
             alert("Already in cart")
         });
 }
 
+export const updateqtychrt = async ({ id, qty }) => {
+    // console.log(qty, "oi")
+    const res = await axios
+        .patch(`http://localhost:8080/cartcart/${id}`, {
+            quantity: qty,
+        })
+        .catch((err) => {
+            console.log(err.message);
+        });
+};
 
+
+export const deletecart = async (id) => {
+    await axios
+        .delete(`http://localhost:8080/cartcart/${id}`)
+        .then(() => alert("Removed from Cart"));
+};

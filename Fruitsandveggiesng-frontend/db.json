@@ -76,20 +76,20 @@
   "cartdata": [
     {
       "id": 2,
+      "categories": "Fruits",
       "name": "Banana",
-      "categories": "fruits",
       "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Bananas_white_background_DS.jpg/320px-Bananas_white_background_DS.jpg",
       "mrp": 50,
       "price": 12,
       "save": 20,
       "weight": 1,
-      "quantity": 1,
+      "quantity": 5,
       "isfavoutite": false
     },
     {
       "id": 1,
+      "categories": "Fruits",
       "name": "Apple",
-      "categories": "fruits",
       "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Red_Apple.jpg/265px-Red_Apple.jpg",
       "mrp": 50,
       "save": 20,
@@ -97,20 +97,7 @@
       "weight": 1,
       "quantity": 1,
       "isfavoutite": false
-    },
-    {
-      "id": 4,
-      "name": "Pineapple",
-      "categories": "fruits",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Pineapple_and_cross_section.jpg/286px-Pineapple_and_cross_section.jpg",
-      "mrp": 50,
-      "price": 200,
-      "save": 20,
-      "weight": 1,
-      "quantity": 0.5,
-      "isfavoutite": false
     }
-
   ],
   "wishlist": [
     {
@@ -139,6 +126,18 @@
       "mrp": 50,
       "price": 12,
       "save": 20,
+      "weight": 1,
+      "quantity": 1,
+      "isfavoutite": false
+    },
+    {
+      "id": 1,
+      "categories": "Fruits",
+      "name": "Apple",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Red_Apple.jpg/265px-Red_Apple.jpg",
+      "mrp": 50,
+      "save": 20,
+      "price": 35,
       "weight": 1,
       "quantity": 1,
       "isfavoutite": false
