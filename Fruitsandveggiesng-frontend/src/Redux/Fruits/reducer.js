@@ -3,7 +3,8 @@ import { FruitsActions } from "./action";
 const init = {
     loading: false,
     fruits: [],
-    error: false
+    onefruit: {},
+    error: false,
 };
 
 
@@ -29,6 +30,22 @@ export const FruitsReducer = (store = init, { type, payload }) => {
                 ...store,
                 loading: false,
                 error: true
+            };
+        }
+
+        case FruitsActions.GET_SINGLEFRUITS_SUCCESS: {
+            return {
+                ...store,
+                loading: false,
+                onefruit: payload
+            };
+        }
+
+        case FruitsActions.PATCH_FRUITS_SUCCESS: {
+            return {
+                ...store,
+                loading: false,
+                onefruit: payload
             };
         }
 

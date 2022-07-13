@@ -25,8 +25,6 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import "./stylenav.css";
 import { Link } from "react-router-dom";
-import { getcartdata, getwishlistdata } from "../Data/fetchdata";
-import { CartContext } from "../../../context/CartContext";
 import Signin from "../Signin/Signin";
 import Signup from "../Signup/Signup";
 import { BsPerson } from "react-icons/bs";
@@ -34,6 +32,8 @@ import { useSearchParams } from "react-router-dom";
 import { fetchFruits } from "../../../Redux/Fruits/action";
 import { getdataSuccess } from "../../../Redux/Filter/action";
 import { fetchCart } from "../../../Redux/Cart/action";
+// import { getwishlistdata } from "../../../Redux/Wishlist/action";
+// import { fetchCart } from "../../../Redux/Cart/action";
 
 const Nav = styled.div`
   top: 0;
@@ -46,10 +46,8 @@ const Nav = styled.div`
 `;
 
 function Navbar() {
+  const [wish, setwish] = useState(0);
   const [value, setValue] = useState("one");
-  const [favcount, setfavcount] = useState(0);
-  // const [cartcount, setcartcount] = useState([]);
-  const [favourite, setfavourite] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [filter, setfilter] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -61,30 +59,22 @@ function Navbar() {
   let reduxtoken = "qswe";
   // let token = "";
   // let reduxtoken = "";
-  const cartcount = useSelector((state) => state.Cart.cart);
-  console.log(cartcount, "carts");
-  
-  const searchHandler = () => {
-    let search;
-    if (filter) {
-      search = {
-        categories: filter,
-      };
-    } else {
-      search = undefined;
-    }
-
-    setSearchParams(search, { replace: true });
-  };
+  const cart = useSelector((state) => state.Cart.cart);
+  const products = useSelector((state) => state.Fruits.fruits);
 
   useEffect(() => {
-    // searchHandler();
     dispatch(fetchFruits({ filter }));
-    // dispatch(fetchCart());
+    dispatch(fetchCart());
     dispatch(getdataSuccess({ filter }));
-    getwishlistdata(setfavourite, setfavcount);
-  }, [setfavcount, filter]);
+  }, [dispatch, filter]);
 
+  const handelwishlist = () => {
+    products
+      .map((p) => {
+        p.isfavoutite == true && wish++;
+      })
+      .then(setwish(wish));
+  };
   const navigation = [
     { title: "Home", to: "/" },
     { title: "About F & V", to: "/about" },
@@ -123,7 +113,7 @@ function Navbar() {
         <TabList>
           {navigation.map((e) =>
             e.title === "Products" ? (
-              <Tab>
+              <Tab key={e.title}>
                 <Menu colorScheme={"purple"}>
                   <Link to="/products">
                     <MenuButton
@@ -152,7 +142,7 @@ function Navbar() {
                 </Menu>
               </Tab>
             ) : (
-              <Tab p={5}>
+              <Tab p={5} key={e.title}>
                 <Link to={e.to}> {e.title}</Link>
               </Tab>
             )
@@ -165,7 +155,7 @@ function Navbar() {
             <Link to="/cart">
               <div className="header-cart">
                 <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" />
-                <span>{cartcount}</span>
+                <span>{cart.length}</span>
               </div>
             </Link>
           </Tab>
@@ -173,7 +163,7 @@ function Navbar() {
             <Link to="/wishlist">
               <div className="header-cart">
                 <img src="https://img.icons8.com/color/48/000000/hearts.png" />
-                <span>{favcount}</span>
+                {/* <span>{wish}</span> */}
               </div>
             </Link>
           </Tab>

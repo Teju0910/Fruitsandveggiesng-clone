@@ -15,10 +15,13 @@ export default function Product() {
 
   useEffect(() => {
     if (products.length == 0) {
-      dispatch(fetchFruits(filt));
+      update();
     }
   }, [dispatch, products.length, filt]);
 
+  const update = () => {
+    dispatch(fetchFruits(filt));
+  };
   return (
     <Flex
       justifyContent="center"
@@ -36,11 +39,14 @@ export default function Product() {
       >
         {products.map((p) => (
           <Fruits
+            alldata={p}
             key={p.id}
             id={p.id}
             name={p.name}
             image={p.image}
             price={p.price}
+            isfavoutite={p.isfavoutite}
+            update={update}
           />
         ))}
       </Grid>

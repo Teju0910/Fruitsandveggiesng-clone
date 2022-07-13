@@ -2,22 +2,28 @@ import {
   Button,
   Image,
   Box,
-  Stack,
+  HStack,
   Heading,
   Text,
   Center,
   Icon,
   color,
+  Flex,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { ImCross } from "react-icons/im";
+import { useDispatch } from "react-redux";
+import { deletecart, fetchCart } from "../../Redux/Cart/action";
 
 // const Fruits = ({ image, name, price }) => {
 const SingleCart = ({ data }) => {
-  console.log(data.name, "..");
+  const dispatch = useDispatch();
+  // console.log(data.name, "..");
   return (
-    <Stack
-      width={300}
+    <Flex
+      direction={{ sm: "row", md: "row", base: "column" }}
+      w={"max-content"}
+      mb={5}
       p={5}
       fontFamily="cursive"
       textAlign="center"
@@ -29,25 +35,27 @@ const SingleCart = ({ data }) => {
         boxShadow: "0 0 1px 2px #e90ac4bb, 0 1px 1px rgba(0, 0, 0, .15)",
       }}
     >
-      {/* <Link to={`/fruits/${id}`}> */}
       <Icon
         as={ImCross}
-        onClick={() => {
-          // deletecart(id);
-        }}
+        onClick={() =>
+          dispatch(deletecart(data.id)).then(() => {
+            dispatch(fetchCart());
+          })
+        }
       />
       <Image
         src={data.image}
         alt=""
+        p={2}
         ml={10}
-        height={200}
+        height={100}
         justifyContent="center"
       />
 
       <Box>
         <Heading
           color=" #3109d3b8"
-          size="md"
+          size="sm"
           textTransform="capitalize"
           fontFamily="cursive"
           _hover={{
@@ -56,20 +64,40 @@ const SingleCart = ({ data }) => {
         >
           {data.name}
         </Heading>
-        <Box>
-          Rate - {data.price}
-          <Box color="gray.600" fontSize="sm">
-            / unit
-          </Box>
-          <Center>
-            {/* <Link to={`/fruits/${data.id}`}>
-              <Button variant="ghost">See more</Button>
-            </Link> */}
-          </Center>
-        </Box>
+        <Center>
+          <Flex>
+            Rate - {data.price}
+            <Box span color="gray.600" fontSize="sm">
+              / unit
+            </Box>
+          </Flex>
+        </Center>
+        <Center>
+          <Flex>
+            Quantity - {data.quantity}
+            <Box span color="gray.600" fontSize="sm">
+              Kg
+            </Box>
+          </Flex>
+        </Center>
+        <Center>
+          <Flex>
+            Total Price -
+            <Box span color="gray.600" fontSize="sm">
+              Rs
+            </Box>
+            {data.quantity * data.price}
+          </Flex>
+        </Center>
       </Box>
-      {/* </Link> */}
-    </Stack>
+      <Center>
+        <Link to={`/products/categories=${data.categories}/${data.id}`}>
+          <Text as="u" ml={15} color={"blue"} _hover={{ color: "green" }}>
+            See more
+          </Text>
+        </Link>
+      </Center>
+    </Flex>
   );
 };
 

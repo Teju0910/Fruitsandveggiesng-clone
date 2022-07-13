@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useContext, useEffect, useState } from "react";
 import { FaLessThanEqual } from "react-icons/fa";
 
-const Fruits = ({ id, name, image, price }) => {
+const Fruits = ({ id, name, image, price, isfavoutite, alldata, update }) => {
   const filt = useSelector((state) => state.Filter.filter);
   var filterfruits = JSON.parse(localStorage.getItem("filterfruits"));
 
@@ -58,7 +58,12 @@ const Fruits = ({ id, name, image, price }) => {
             / unit
           </Box> */}
           <Center mt={3}>
-            <Wishbtn id={id} />
+            <Wishbtn
+              id={id}
+              isfavoutite={isfavoutite}
+              alldata={alldata}
+              update={update}
+            />
             <Link to={`/products/categories=${filterfruits}/${id}`}>
               <Text as="u" ml={15} color={"blue"} _hover={{ color: "green" }}>
                 See more

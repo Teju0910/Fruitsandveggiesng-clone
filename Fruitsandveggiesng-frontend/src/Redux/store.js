@@ -1,19 +1,30 @@
 import { legacy_createStore as createStore, combineReducers, applyMiddleware } from "redux"
 import { FruitsReducer } from "./Fruits/reducer";
-
+import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from "redux-thunk";
 import { CartReducer } from "./Cart/reducer";
 import { FilterReducer } from "./Filter/reducer";
 
+
 const rootReducers = combineReducers({
     Fruits: FruitsReducer,
     Filter: FilterReducer,
-    Cart: CartReducer
+    Cart: CartReducer,
+    // Wishlist: WishlistReducer,
 })
 
-export const store = createStore(
-    rootReducers,
-    applyMiddleware(thunk)
-);
+
+export const store = createStore(rootReducers, composeWithDevTools(
+    // rootReducers,
+    applyMiddleware(thunk),
+    // other store enhancers if any
+));
+
+
+// export const store = createStore(
+//     rootReducers,
+//     applyMiddleware(thunk)
+
+// );
 //createStore for me store whith this reducer
 console.log("initial todos", store.getState())

@@ -4,6 +4,8 @@ export const FruitsActions = {
     GET_FRUITS_REQUEST: "GET_FRUITS_REQUEST",
     GET_FRUITS_SUCCESS: "GET_FRUITS_SUCCESS",
     GET_FRUITS_FAILURE: "GET_FRUITS_FAILURE",
+    GET_SINGLEFRUITS_SUCCESS: "GET_SINGLEFRUITS_SUCCESS",
+    PATCH_FRUITS_SUCCESS: "PATCH_FRUITS_SUCCESS",
 };
 
 export const getdataRequest = () => ({
@@ -57,15 +59,34 @@ export const fetchFruits = ({ filter }) => (dispatch) => {
 };
 
 
+export const getsingledataSuccess = (data) => ({
+    type: FruitsActions.GET_SINGLEFRUITS_SUCCESS,
+    payload: data
+});
 
-export const getsingleproduct = async (id, setdata) => {
-    console.log(id, "id");
-    await axios({
+export const getsingleproduct = (id) => (dispatch) => {
+
+    // console.log(id, "id")
+    axios({
         url: `http://localhost:8080/fruits/${id}`,
         method: "get",
     })
         .then((res) => {
-            setdata(res.data);
+            console.log(res.data, "id")
+            dispatch(getsingledataSuccess(res.data));
+        })
+        .catch((err) => {
+            console.log(err.message);
+        });
+};
+
+
+
+export const updatedatawishlist = ({ id, wish }) => (dispatch) => {
+    console.log(wish, "oi")
+    axios
+        .patch(`http://localhost:8080/fruits/${id}`, {
+            isfavoutite: wish,
         })
         .catch((err) => {
             console.log(err.message);

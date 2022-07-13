@@ -1,8 +1,9 @@
 import { Carousel } from "react-carousel-minimal";
 import { useParams } from "react-router-dom";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { FiPlus, FiMinus, FiHeart } from "react-icons/fi";
 import { AiTwotoneHeart } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
 import "../../Home/Banners/styles.css";
 import axios from "axios";
 import React from "react";
@@ -19,30 +20,25 @@ import {
 } from "@chakra-ui/react";
 import "./SingleProduct.css";
 import { Wishbtn } from "../Wishbtn";
-import { CartContext } from "../../../context/CartContext";
-import { useDispatch } from "react-redux";
-import { addtoCart, updateqtychrt } from "../../../Redux/Cart/action";
+import {
+  addtoCart,
+  fetchCart,
+  updateqtychrt,
+} from "../../../Redux/Cart/action";
+import { getsingleproduct } from "../../../Redux/Fruits/action";
 
 const SingleProduct = () => {
-  const [pro, setpro] = useState([]);
+  const pro = useSelector((state) => state.Fruits.onefruit);
   const [qty, setqty] = useState(1);
   const [wish, setwish] = useState(false);
   const dispatch = useDispatch();
 
+  // console.log(singlepro, "singlepro");
   const { id } = useParams();
 
-  console.log(id, "idrt");
   useEffect(() => {
-    getsingleData();
-  }, [wish]);
-
-  const getsingleData = async () => {
-    let data = await axios
-      .get(`http://localhost:8080/fruits/${id}`)
-      .then((res) => {
-        setpro(res.data);
-      });
-  };
+    dispatch(getsingleproduct(id));
+  }, [id]);
 
   const handleQty = (value, qty) => {
     if (qty <= 1 && value == "-1") {
@@ -84,7 +80,6 @@ const SingleProduct = () => {
             // captionStyle={captionStyle}
             radius="10px"
             slideNumber={true}
-            // slideNumberStyle={slideNumberStyle}
             captionPosition="bottom"
             automatic={true}
             dots={true}
@@ -114,7 +109,7 @@ const SingleProduct = () => {
             >
               {pro.name}
             </Heading>
-            <Wishbtn mt={30} id={pro.id} />
+            <Wishbtn mt={30} isfavoutite={pro.isfavoutite} id={pro.id} />
           </Flex>
           <Heading
             color={"#35AF6A"}
@@ -162,8 +157,8 @@ const SingleProduct = () => {
             _hover={{ bg: "#f30000", color: "white" }}
             onClick={() =>
               dispatch(addtoCart(pro)).then(() => {
-               
-                dispatch(updateqtychrt({ id, qty }));
+                dispatch(fetchCart());
+                updateqtychrt({ id, qty });
               })
             }
           >

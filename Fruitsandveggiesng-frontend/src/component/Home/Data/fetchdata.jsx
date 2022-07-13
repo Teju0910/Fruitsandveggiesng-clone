@@ -1,22 +1,6 @@
 import axios from "axios";
 import { Alert, WishAlert } from "../../Products/Minicomponents";
 
-// export const getdata = async (setdata) => {
-//   await axios({
-//     url: "http://localhost:8080/fruits",
-//     method: "get",
-//     params: {
-//       q: "Fruits",
-//     },
-//   })
-//     .then((res) => {
-//       setdata(res.data);
-//     })
-//     .catch((err) => {
-//       console.log(err.message);
-//     });
-// };
-
 export const getsingleproduct = async (id, setdata) => {
   console.log(id, "id");
   await axios({
@@ -45,8 +29,6 @@ export const getsingleproduct = async (id, setdata) => {
 //     });
 // };
 
-
-
 // export const deletecart = async (id) => {
 //   await axios
 //     .delete(`http://localhost:8080/cartdata/${id}`)
@@ -67,19 +49,19 @@ export const getsingleproduct = async (id, setdata) => {
 //     });
 // };
 
-export const getwishlistdata = async (setfavourite, setfavcount) => {
-  await axios({
-    url: "http://localhost:8080/wishlist",
-    method: "get",
-  })
-    .then((res) => {
-      setfavourite(res.data);
-      setfavcount(res.data.length);
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
-};
+// export const getwishlistdata = async (setfavourite, setfavcount) => {
+//   await axios({
+//     url: "http://localhost:8080/wishlist",
+//     method: "get",
+//   })
+//     .then((res) => {
+//       setfavourite(res.data);
+//       setfavcount(res.data.length);
+//     })
+//     .catch((err) => {
+//       console.log(err.message);
+//     });
+// };
 
 export const modifiywishlist = async (id, pro) => {
   console.log(pro, "midifi");

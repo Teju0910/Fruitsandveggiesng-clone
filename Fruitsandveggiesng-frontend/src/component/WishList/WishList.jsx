@@ -1,17 +1,17 @@
 import { Flex, Grid, Center } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { parsePath } from "react-router-dom";
-import { getdata, getwishlistdata } from "../Home/Data/fetchdata";
+import { getdata } from "../Home/Data/fetchdata";
 import Fruits from "../Products/Fruits/Fruits";
 
 export default function WishList() {
-  const [favourite, setfavourite] = useState([]);
-  const [favcount, setfavcount] = useState(0);
-  console.log(favourite, "favourite*");
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.Fruits.fruits);
 
   useEffect(() => {
-    getwishlistdata(setfavourite, setfavcount);
-  }, []);
+    // dispatch(getwishlistdata());
+  }, [dispatch]);
 
   return (
     <Flex
@@ -27,17 +27,22 @@ export default function WishList() {
         gridGap="5"
         gridTemplateColumns="repeat( auto-fit, minmax(300px, 1fr) )"
       >
-        {favourite != [] ? (
-          favourite?.map((p) => (
-            <Fruits
-              key={p.name}
-              id={p.id}
-              name={p.name}
-              image={p.image}
-              price={p.price}
-              // {...p}
-            />
-          ))
+        {products != [] ? (
+          products?.map(
+            (p) =>
+              p.isfavoutite == true && (
+                <Fruits
+                  key={p.name}
+                  id={p.id}
+                  name={p.name}
+                  image={p.image}
+                  price={p.price}
+                  isfavoutite={p.isfavoutite}
+                  alldata={p}
+                  // {...p}
+                />
+              )
+          )
         ) : (
           <Center>
             {" "}

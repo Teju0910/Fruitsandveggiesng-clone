@@ -1,25 +1,25 @@
-import {
-  addtowishlist,
-  deletewishlist,
-  getsingleproduct,
-  modifiywishlist,
-} from "../Home/Data/fetchdata";
 import { useEffect, useState } from "react";
 import { Box } from "@chakra-ui/react";
+import { useDispatch, useSelector } from "react-redux";
+// import { addtowishlist, deletewishlist } from "../../Redux/Wishlist/action";
+import {
+  getsingleproduct,
+  updatedatawishlist,
+} from "../../Redux/Fruits/action";
 
-export const Wishbtn = ({ id }) => {
-  const [wish, setwish] = useState(false);
-  const [pro, setpro] = useState({});
-  // console.log(pro, "p");
+export const Wishbtn = ({ isfavoutite, id, alldata, update }) => {
+  // console.log(isfavoutite, id, "isfavoutite");
+  const [wish, setwish] = useState(isfavoutite);
+  const onefruit = useSelector((state) => state.Fruits.onefruit);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    modifiywishlist(pro.id, wish);
-    getsingleproduct(id, setpro);
-  }, [wish]);
+    dispatch(getsingleproduct(id));
+  }, [dispatch, wish]);
 
   return (
     <Box zIndex="15" width="40px">
-      {!wish ? (
+      {!isfavoutite ? (
         <img
           _hover={{
             boxShadow: "0 0 1px 2px #e90ac4bb, 0 1px 1px rgba(0, 0, 0, .15)",
@@ -28,8 +28,10 @@ export const Wishbtn = ({ id }) => {
           height="10px"
           onClick={() => {
             setwish(!wish);
-            modifiywishlist(pro.id, wish);
-            addtowishlist(pro);
+            dispatch(updatedatawishlist({ id, wish })).then(() => {
+              console.log("hi", update());
+              update();
+            });
           }}
         />
       ) : (
@@ -40,9 +42,8 @@ export const Wishbtn = ({ id }) => {
           src="https://img.icons8.com/color/48/000000/hearts.png"
           height="10px"
           onClick={() => {
-            setwish(!wish);
-            modifiywishlist(pro.id, wish);
-            deletewishlist(pro.id);
+            setwish(!isfavoutite);
+            dispatch(updatedatawishlist({ id, wish }));
           }}
         />
       )}
