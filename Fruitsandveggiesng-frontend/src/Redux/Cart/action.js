@@ -30,15 +30,21 @@ export const fetchCart = () => (dispatch) => {
     dispatch(getcartActionreq);
 
     return axios({
-        url: "http://localhost:8080/cartdata",
+        url: "http://localhost:5656/cart/find/62d64e8120c10042110084af",
         method: "GET",
     })
         .then((res) => {
-            // console.log(res.data, "responde")
-            const getcartActionres = getcartSuccess(res.data);
-            console.log("a", getcartActionres)
-            dispatch(getcartSuccess(res.data));
-            console.log("b")
+
+            let x = res.data.data
+            x.map((e) => {
+                // console.log("a")         
+                // console.log(e.userId,e.cartproducts, "responde")
+                const getcartActionres = getcartSuccess(e.cartproducts);
+                dispatch(getcartSuccess(e.cartproducts));
+                // console.log("b")
+
+            })
+
         })
         .catch((err) => {
             const getcartActionerr = getcartFailure();
@@ -62,13 +68,20 @@ export const postcartFailure = () => ({
     type: CartActions.POST_CART_FAILURE
 });
 
-export const addtoCart = (payload) => (dispatch) => {
-    // console.log(payload, "addtocart")
+export const addtoCart = ({ id, qty }) => (dispatch) => {
+    console.log(id, qty, "addtocart")
+    let data = {
+        userId: "62d64e8120c10042110084af",
+        cartproducts: [
+            { productId: id },
+            { quantity: qty },
+        ]
+    }
     const postcartActionreq = postcartRequest();
     dispatch(postcartActionreq);
-    return axios.post("http://localhost:8080/cartdata", payload)
+    return axios.post("http://localhost:5656/cart", data)
         .then((res) => {
-            const postcartActionres = postcartSuccess(payload);
+            const postcartActionres = postcartSuccess(data);
             dispatch(postcartActionres);
         })
         .then(() => alert("Added to cart"))
@@ -81,21 +94,21 @@ export const addtoCart = (payload) => (dispatch) => {
         });
 }
 
-export const updateqtychrt = async ({ id, qty }) => {
-    // console.log(qty, "oi")
-    const res = await axios
-        .patch(`http://localhost:8080/cartdata/${id}`, {
-            quantity: qty,
-        })
-        .catch((err) => {
-            console.log(err.message);
-        });
-};
+// export const updateqtychrt = async ({ id, qty }) => {
+//     // console.log(qty, "oi")
+//     const res = await axios
+//         .patch(`http://localhost:5656/cart/${id}`, {
+//             quantity: qty,
+//         })
+//         .catch((err) => {
+//             console.log(err.message);
+//         });
+// };
 
 
 export const deletecart = (id) => (dispatch) => {
     axios
-        .delete(`http://localhost:8080/cartdata/${id}`)
+        .delete(`http://localhost:5656/cart/${id}`)
         .then(() => alert("Removed from Cart"));
 };
 

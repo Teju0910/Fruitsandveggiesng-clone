@@ -23,13 +23,13 @@ export const getdataFailure = () => ({
 
 
 export const fetchFruits = ({ filter }) => (dispatch) => {
-    // console.log(filter, "paylos")
+    console.log(filter, "paylos")
     const getdataActionreq = getdataRequest();
     dispatch(getdataActionreq);
     // console.log(`token is`, getState().auth.token);
     if (filter != "") {
         return axios({
-            url: "http://localhost:8080/fruits",
+            url: "http://localhost:5656/fruitsandveggies",
             method: "GET",
             params: {
                 categories: filter
@@ -45,7 +45,7 @@ export const fetchFruits = ({ filter }) => (dispatch) => {
     }
     else {
         return axios({
-            url: "http://localhost:8080/fruits",
+            url: "http://localhost:5656/fruitsandveggies",
             method: "GET",
         }).then((res) => {
             const getdataActionres = getdataSuccess(res.data);
@@ -68,11 +68,11 @@ export const getsingleproduct = (id) => (dispatch) => {
 
     // console.log(id, "id")
     axios({
-        url: `http://localhost:8080/fruits/${id}`,
+        url: `http://localhost:5656/fruitsandveggies/${id}`,
         method: "get",
     })
         .then((res) => {
-            console.log(res.data, "id")
+            // console.log(res.data, "id")
             dispatch(getsingledataSuccess(res.data));
         })
         .catch((err) => {
@@ -83,9 +83,9 @@ export const getsingleproduct = (id) => (dispatch) => {
 
 
 export const updatedatawishlist = ({ id, wish }) => (dispatch) => {
-    console.log(wish, "oi")
+    // console.log(wish, "oi")
     axios
-        .patch(`http://localhost:8080/fruits/${id}`, {
+        .patch(`http://localhost:5656/fruitsandveggies/${id}`, {
             isfavoutite: wish,
         })
         .catch((err) => {

@@ -75,31 +75,16 @@
   ],
   "cartdata": [
     {
-      "id": 6,
-      "name": "Irish Potato",
-      "categories": "Vegetables",
-      "image": "https://fruitsandveggiesng.com/wp-content/uploads/2020/05/potato.jpg",
-      "mrp": 50,
-      "price": 200,
-      "save": 20,
-      "weight": 1,
-      "quantity": 0.5,
-      "isfavoutite": false
-    },
-    {
-      "id": 2,
+      "id": 1,
       "categories": "Fruits",
-      "name": "Banana",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Bananas_white_background_DS.jpg/320px-Bananas_white_background_DS.jpg",
+      "name": "Apple",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Red_Apple.jpg/265px-Red_Apple.jpg",
       "mrp": 50,
-      "price": 12,
       "save": 20,
+      "price": 35,
       "weight": 1,
-      "quantity": 3,
+      "quantity": 2,
       "isfavoutite": true
     }
   ]
-
-
-  
 }

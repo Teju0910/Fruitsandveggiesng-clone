@@ -10,8 +10,19 @@ import {
   Badge,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { useContext, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUser } from "../../Redux/User/action";
 
 export default function UserProfile() {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.User.user);
+  console.log(user, "user");
+
+  useEffect(() => {
+    dispatch(fetchUser("62d562e168398ea4dc2c4f59"));
+  }, []);
+
   return (
     <Center py={6} pt={150}>
       <Box
@@ -26,7 +37,7 @@ export default function UserProfile() {
         <Avatar
           size={"xl"}
           src={
-            "https://images.unsplash.com/photo-1520810627419-35e362c5dc07?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzig_Q4ZdmZnwjL09Q4hLjgK_eJrxoUD1K6g&usqp=CAU"
           }
           alt={"Avatar Alt"}
           mb={4}
@@ -44,12 +55,14 @@ export default function UserProfile() {
           }}
         />
         <Heading fontSize={"2xl"} fontFamily={"body"}>
-          Lindsey James
+          {user.name}
         </Heading>
         <Text fontWeight={600} color={"gray.500"} mb={4}>
-          @lindsey_jam3s
+          {user.email}
         </Text>
-
+        <Text fontWeight={600} color={"gray.500"} mb={4}>
+          Mobile Number - {user.mobileNumber}
+        </Text>
         <Stack mt={8} direction={"row"} spacing={4}>
           <Button
             flex={1}

@@ -155,11 +155,12 @@ const SingleProduct = () => {
             width="200px"
             bg="#0BC5EA"
             _hover={{ bg: "#f30000", color: "white" }}
-            onClick={() =>
-              dispatch(addtoCart(pro)).then(() => {
-                dispatch(fetchCart());
-                updateqtychrt({ id, qty });
-              })
+            onClick={
+              () => dispatch(addtoCart({ id, qty }))
+              // .then(() => {
+              //   dispatch(fetchCart());
+              //   updateqtychrt({ id, qty });
+              // })
             }
           >
             Add to Cart

@@ -4,7 +4,7 @@ import {
   TabList,
   Tab,
   Icon,
-  Select,
+  Box,
   Drawer,
   Button,
   MenuList,
@@ -55,10 +55,10 @@ function Navbar() {
   const btnRef = React.useRef();
   const cancelRef = React.useRef();
   const dispatch = useDispatch();
-  let token = "qwe";
-  let reduxtoken = "qswe";
-  // let token = "";
-  // let reduxtoken = "";
+  // let token = "qwe";
+  // let reduxtoken = "qswe";
+  let token = "";
+  let reduxtoken = "";
   const cart = useSelector((state) => state.Cart.cart);
   const products = useSelector((state) => state.Fruits.fruits);
 
@@ -167,28 +167,30 @@ function Navbar() {
               </div>
             </Link>
           </Tab>
+
           <Tab>
-            {/* <Icon as={VscAccount} onClick={onOpen} /> */}
-            {token == undefined || token == "" || reduxtoken == "" ? (
-              <Drawer
-                size="lg"
-                isOpen={isOpen}
-                placement="right"
-                onClose={onClose}
-                finalFocusRef={btnRef}
-              >
-                <DrawerOverlay />
-                <DrawerContent>
-                  <ButtonGroup gap="2">
-                    <Button
-                      leftIcon={<BsPerson />}
-                      colorScheme="telegram"
-                      mr={6}
-                      onClick={onOpen}
-                    >
-                      Sign In
-                    </Button>
-                    {!hide ? (
+            {token === undefined || token === "" || reduxtoken === "" ? (
+              <Box>
+                <ButtonGroup gap="2">
+                  <Button
+                    leftIcon={<BsPerson />}
+                    colorScheme="telegram"
+                    mr={6}
+                    onClick={onOpen}
+                  >
+                    Sign In
+                  </Button>
+                </ButtonGroup>
+                <Drawer
+                  size="lg"
+                  isOpen={isOpen}
+                  placement="right"
+                  onClose={onClose}
+                  finalFocusRef={btnRef}
+                >
+                  <DrawerOverlay />
+                  <DrawerContent>
+                    {hide ? (
                       <Signin
                         onOpen={onOpen}
                         onClose={onClose}
@@ -205,9 +207,9 @@ function Navbar() {
                         handelhideshow={handelhideshow}
                       />
                     )}
-                  </ButtonGroup>
-                </DrawerContent>
-              </Drawer>
+                  </DrawerContent>
+                </Drawer>
+              </Box>
             ) : (
               <Menu colorScheme={"purple"}>
                 <MenuButton

@@ -11,7 +11,7 @@ export default function Product() {
   const dispatch = useDispatch();
   const filt = useSelector((state) => state.Filter.filter);
   const products = useSelector((state) => state.Fruits.fruits);
-  // console.log(filt, "sotrese");
+  // console.log(products, "sotrese");
 
   useEffect(() => {
     if (products.length == 0) {
@@ -37,11 +37,11 @@ export default function Product() {
         gridGap="5"
         gridTemplateColumns="repeat( auto-fit, minmax(250px, 1fr) )"
       >
-        {products.map((p) => (
+        {products.data.map((p) => (
           <Fruits
             alldata={p}
-            key={p.id}
-            id={p.id}
+            key={p._id}
+            id={p._id}
             name={p.name}
             image={p.image}
             price={p.price}
