@@ -51,6 +51,10 @@ const SingleProduct = () => {
     }
     setqty((prev) => prev + value);
   };
+
+  const handelcart = () => {
+    dispatch(addtoCart({ id, qty }));
+  };
   return (
     <Box
       p={{ base: "10", md: "20", sm: "10", xs: "10" }}
@@ -156,7 +160,8 @@ const SingleProduct = () => {
             bg="#0BC5EA"
             _hover={{ bg: "#f30000", color: "white" }}
             onClick={
-              () => dispatch(addtoCart({ id, qty }))
+              handelcart
+
               // .then(() => {
               //   dispatch(fetchCart());
               //   updateqtychrt({ id, qty });

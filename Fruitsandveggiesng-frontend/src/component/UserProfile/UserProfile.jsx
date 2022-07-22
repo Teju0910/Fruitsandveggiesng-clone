@@ -17,12 +17,17 @@ import { fetchUser } from "../../Redux/User/action";
 export default function UserProfile() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.User.user);
-  console.log(user, "user");
+
+  let userget = JSON.parse(localStorage.getItem("fruitaccessuser"));
 
   useEffect(() => {
-    dispatch(fetchUser("62d562e168398ea4dc2c4f59"));
+    dispatch(fetchUser(userget._id));
   }, []);
 
+  const handellogout = () => {
+    localStorage.setItem("fruitaccesstoken", JSON.stringify(""));
+    localStorage.setItem("fruitaccessuser", JSON.stringify(""));
+  };
   return (
     <Center py={6} pt={150}>
       <Box
@@ -89,6 +94,7 @@ export default function UserProfile() {
             _focus={{
               bg: "blue.500",
             }}
+            onClick={handellogout}
           >
             Logout
           </Button>

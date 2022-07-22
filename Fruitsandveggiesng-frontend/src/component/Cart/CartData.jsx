@@ -18,13 +18,25 @@ export default function CartData() {
   const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   let navigate = useNavigate();
-  console.log(cart, "cart");
 
   useEffect(() => {
-    cart.map((e) => {
-      dispatch(getsingleproduct(e.productId));
-    });
+    if (cart.length == 0) {
+      dispatch(fetchCart());
+      // .then(() => {
+      //   handeltotal();
+      // });
+    }
+    dispatch(fetchCart());
+    // .then(() => {
+    //   handeltotal();
+    // });
   }, []);
+  console.log(cart, "cart");
+  // useEffect(() => {
+  //   cart.map((e) => {
+  //     dispatch(getsingleproduct(e.productId));
+  //   });
+  // }, []);
 
   // https://www.freecodecamp.org/news/integrate-a-payment-gateway-in-next-js-and-react-with-razorpay-and-tailwindcss/
 
@@ -45,60 +57,50 @@ export default function CartData() {
 
   // console.log(instance.response, "order");
 
-  const options = {
-    key: "rzp_test_4KpG1twUj3b4p2",
-    amount: `${total * 100}`, //  = INR 1
-    name: "Fruites & Veggies",
-    description: "Thankyou for your order",
-    image:
-      "https://fruitsandveggiesng.com/wp-content/uploads/2021/09/fv_logo-96x61-1.png",
-    handler: function (response) {
-      console.log(response, "resp");
-      alert(response.razorpay_payment_id);
-      // navigate("/", { replace: true });
+  // const options = {
+  //   key: "rzp_test_4KpG1twUj3b4p2",
+  //   amount: `${total * 100}`, //  = INR 1
+  //   name: "Fruites & Veggies",
+  //   description: "Thankyou for your order",
+  //   image:
+  //     "https://fruitsandveggiesng.com/wp-content/uploads/2021/09/fv_logo-96x61-1.png",
+  //   handler: function (response) {
+  //     console.log(response, "resp");
+  //     alert(response.razorpay_payment_id);
+  //     // navigate("/", { replace: true });
 
-      // alert(response.razorpay_order_id);
-      // alert(response.razorpay_signature);
-    },
-    prefill: {
-      name: "Tejasvini",
-      contact: "7894561230",
-      email: "demo@demo.com",
-    },
-    notes: {
-      address: "some address",
-    },
-    theme: {
-      color: "#F37254",
-      hide_topbar: false,
-    },
-  };
-  localStorage.setItem("totalfruitcost", total);
-  console.log("total", total);
-  console.log("totalpay", totalpay);
-
-  useEffect(() => {
-    if (cart === []) {
-      dispatch(fetchCart()).then(() => {
-        handeltotal();
-      });
-    }
-    dispatch(fetchCart()).then(() => {
-      handeltotal();
-    });
-  }, []);
+  //     // alert(response.razorpay_order_id);
+  //     // alert(response.razorpay_signature);
+  //   },
+  //   prefill: {
+  //     name: "Tejasvini",
+  //     contact: "7894561230",
+  //     email: "demo@demo.com",
+  //   },
+  //   notes: {
+  //     address: "some address",
+  //   },
+  //   theme: {
+  //     color: "#F37254",
+  //     hide_topbar: false,
+  //   },
+  // };
+  // localStorage.setItem("totalfruitcost", total);
+  // console.log("total", total);
+  // console.log("totalpay", totalpay);
 
   const handeltotal = () => {
-    cart.map((e) => {
-      settotal((prev) => prev + e.price * e.quantity);
-    });
+    cart &&
+      cart.map((e) => {
+        settotal((prev) => prev + e.price * e.quantity);
+      });
     dispatch(gettotalcartRequest(total));
   };
 
-  const openPayModal = (options) => {
-    var rzp1 = new window.Razorpay(options);
-    rzp1.open();
-  };
+  // const openPayModal = (options) => {
+  //   var rzp1 = new window.Razorpay(options);
+  //   rzp1.open();
+  // };
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -164,7 +166,10 @@ export default function CartData() {
         >
           Total Cart Items = {cart.length}
         </Heading>
-        <Button bg="#0BC5EA" onClick={() => openPayModal(options)}>
+        <Button
+          bg="#0BC5EA"
+          //  onClick={() => openPayModal(options)}
+        >
           Proceed to Pay
         </Button>
       </Box>

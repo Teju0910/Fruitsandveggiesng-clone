@@ -16,19 +16,19 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-//POST---
-router.post("/", async (req, res) => {
-    try {
-        const savedCart = Cart.create(req.body);
-        res.status(200).json(savedCart);
+// //POST---
+// router.post("/", async (req, res) => {
+//     try {
+//         const savedCart = Cart.create(req.body);
+//         res.status(200).json(savedCart);
 
-    } catch (err) {
-        res.status(500).json(err);
-    }
-});
+//     } catch (err) {
+//         res.status(500).json(err);
+//     }
+// });
 
 //UPDATE---
-router.patch("/:id", crudController.updateById(Cart));
+// router.patch("/:id", crudController.updateById(Cart));
 
 //GET USER CART---
 router.get("/find/:userId", async (req, res) => {
@@ -43,22 +43,110 @@ router.get("/find/:userId", async (req, res) => {
 ///DELETE---
 router.delete("/:id", crudController.deleteById(Cart));
 
-module.exports = router;
+
+
+
+router.post("/", async (req, res) => {
+    const newCart = new Cart(req.body);
+
+    try {
+        const savedCart = await newCart.save();
+        res.status(200).json(savedCart);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+router.patch("/", async (req, res) => {
+    console.log(req.body, "...")
+    try {
+        console.log("A")
+        console.log(req.body.cartproducts, "cartproduct")
+        Cart.findOne({ userId: req.body.userId },
+            async (err, example) => {
+                console.log("B")
+                if (err) { return console.error(err) }
+                if (example) {
+                    let allcart = example.cartproducts
+                    console.log("C", allcart);
+                    let falg = true;
+                    for (let i = 0; i < allcart.length; i++) {
+                        console.log("D")
+                        if (allcart[i].productId === req.body.cartproducts[0].productId) {
+                            console.log("E")
+                            falg = false;
+                            console.log("Already in cartbackend")
+                            res.send({ message: "Already in cartbackend" });
+                            break;
+                        }
+                    }
+                    if (falg == true) {
+                        console.log("F")
+                        Cart.findOne({ userId: req.body.userId })
+                            .then((user) => {
+                                const cart = user.cartproducts
+                                console.log("X", cart)
+                                cart.push(req.body.cartproducts[0])
+                                console.log("Z", cart)
+                                return user.save()
+                            })
+                            .then((user) => {
+                                res.send({ user });
+                            })
+                            .catch(e => res.status(400).send(e));
+                    }
+                }
+            })
+    } catch (err) {
+        console.log(err)
+        res.status(500).json(err);
+    }
+})
+
 // router.post("/", async (req, res) => {
-//     var query = req.body.cartproducts.productId;
-//     console.log(req, "query")
+//     console.log(req.body, "userid")
+//     // const newCart = new Cart(req.body);
 //     try {
-//         // Cart.findOne({ productId: query }, function (err, example) {
-//         //     if (err) console.log(err);
-//         //     console.log(example.cartproducts, "example")
-//         //     if (example.cartproducts.productId == query) {
-//         //         console.log("This has already been saved");
-//         //     } else {
-//         const savedCart = Cart.create(req.body);
-//         res.status(200).json(savedCart);
-//         //     }
-//         // })
+//         console.log("A")
+//         console.log(req.body.cartproducts, "cartproduct")
+//         Cart.findOne({ userId: req.body.userId },
+
+//             async (err, example) => {
+//                 console.log("B")
+//                 if (err) { return console.error(err) }
+//                 if (example) {
+//                     console.log("C")
+//                     let allcart = example.cartproducts
+//                     for (let i = 0; i < allcart.length; i++) {
+//                         console.log("D")
+//                         if (allcart[i].productId === req.body.cartproducts[0].productId) {
+//                             console.log("E")
+//                             console.log("Already in cartbackend")
+//                         }
+//                         else {
+//                             const mycart = Cart.findOne({ userId: req.body.userId })
+//                             console.log("F", mycart)
+//                             // const newCart = new Cart(req.body.cartproducts);
+//                             // allcart.push(req.body.cartproducts)
+
+//                             // const savedCart = await Cart.create(req.body.cartproducts);
+//                             // console.log("G", savedCart)
+//                             // res.status(200).json(savedCart);
+//                             // console.log("I")
+//                         }
+//                     }
+//                 }
+//                 else {
+//                     const newCart = new Cart(req.body);
+//                     const savedCart = Cart.create(newCart);
+//                     res.status(200).json(savedCart);
+//                 }
+//             })
 //     } catch (err) {
+//         console.log(err)
 //         res.status(500).json(err);
 //     }
 // });
+
+
+module.exports = router;

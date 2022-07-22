@@ -17,7 +17,8 @@ export default function Product() {
     if (products.length == 0) {
       update();
     }
-  }, [dispatch, products.length, filt]);
+    update();
+  }, [products.length, filt]);
 
   const update = () => {
     dispatch(fetchFruits(filt));

@@ -14,7 +14,7 @@ const generateToken = (user) => {
 }
 
 const register = async (req, res) => {
-  console.log("s")
+  // console.log(req.body.name, "s")
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -35,7 +35,7 @@ const register = async (req, res) => {
     // if new user, create it or allow to register;
     user = await User.create(req.body);
     const token = generateToken(user)
-    console.log("a")
+    // console.log("a")
 
     // send email  to customer
     let status = "ok";
@@ -63,7 +63,7 @@ const register = async (req, res) => {
         </p>
 `, // html body
     }
-    console.log("c")
+    // console.log("c")
 
     const result = await transporter.sendMail(mailoptions)
     if (result) {
@@ -83,6 +83,7 @@ const register = async (req, res) => {
 
 
 const login = async (req, res) => {
+   console.log(req.body, "log")
   try {
     const user = await User.findOne({ email: req.body.email })
     //checked if mail exists
@@ -100,6 +101,7 @@ const login = async (req, res) => {
 
     // if it matches
     const token = generateToken(user)
+    // console.log(token, "token")
     return res.status(200).send({ user, token });
 
   }

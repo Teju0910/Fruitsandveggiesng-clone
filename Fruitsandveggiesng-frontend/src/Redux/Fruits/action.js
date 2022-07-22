@@ -66,7 +66,7 @@ export const getsingledataSuccess = (data) => ({
 
 export const getsingleproduct = (id) => (dispatch) => {
 
-    // console.log(id, "id")
+    console.log(id, "id")
     axios({
         url: `http://localhost:5656/fruitsandveggies/${id}`,
         method: "get",

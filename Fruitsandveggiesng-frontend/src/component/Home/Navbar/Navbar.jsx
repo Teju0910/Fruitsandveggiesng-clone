@@ -55,13 +55,14 @@ function Navbar() {
   const btnRef = React.useRef();
   const cancelRef = React.useRef();
   const dispatch = useDispatch();
-  // let token = "qwe";
-  // let reduxtoken = "qswe";
-  let token = "";
+
+  let token =
+    useSelector((store) => store.token) ||
+    JSON.parse(localStorage.getItem("fruitaccesstoken"));
   let reduxtoken = "";
   const cart = useSelector((state) => state.Cart.cart);
   const products = useSelector((state) => state.Fruits.fruits);
-
+  // console.log(token, "token");
   useEffect(() => {
     dispatch(fetchFruits({ filter }));
     dispatch(fetchCart());
@@ -90,6 +91,13 @@ function Navbar() {
 
   const handelhideshow = () => {
     sethide(!hide);
+  };
+
+  const handellogout = () => {
+    localStorage.setItem("fruitaccesstoken", JSON.stringify(""));
+    localStorage.setItem("fruitaccessuser", JSON.stringify(""));
+    alert("LogOut Done");
+    handelhideshow();
   };
 
   return (
@@ -155,7 +163,7 @@ function Navbar() {
             <Link to="/cart">
               <div className="header-cart">
                 <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" />
-                <span>{cart.length}</span>
+                <span>{cart && cart.length}</span>
               </div>
             </Link>
           </Tab>
@@ -169,7 +177,7 @@ function Navbar() {
           </Tab>
 
           <Tab>
-            {token === undefined || token === "" || reduxtoken === "" ? (
+            {token == undefined || token == "" ? (
               <Box>
                 <ButtonGroup gap="2">
                   <Button
@@ -227,7 +235,7 @@ function Navbar() {
                   />
                 </MenuButton>
                 <MenuList alignItems="end">
-                  <MenuItem>Logout</MenuItem>
+                  <MenuItem onClick={handellogout}>Logout</MenuItem>
                   <MenuItem>
                     <Link to="/userprofile">User Profile</Link>
                   </MenuItem>

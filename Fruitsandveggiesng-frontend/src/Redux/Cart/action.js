@@ -25,26 +25,24 @@ export const getcartFailure = () => ({
 });
 
 export const fetchCart = () => (dispatch) => {
-    // console.log("hi")
+    console.log("hi")
     const getcartActionreq = getcartRequest();
     dispatch(getcartActionreq);
 
     return axios({
-        url: "http://localhost:5656/cart/find/62d64e8120c10042110084af",
+        url: "http://localhost:5656/cart/find/62d562e168398ea4dc2c4f59",
         method: "GET",
     })
         .then((res) => {
-
-            let x = res.data.data
+            let x = res.data.cartproducts
+            console.log(x, "ax")
             x.map((e) => {
-                // console.log("a")         
-                // console.log(e.userId,e.cartproducts, "responde")
-                const getcartActionres = getcartSuccess(e.cartproducts);
-                dispatch(getcartSuccess(e.cartproducts));
-                // console.log("b")
-
+                // console.log(e.cartproducts, "a")
+                // console.log(e.userId, e.cartproducts, "responde")
+                const getcartActionres = getcartSuccess(e);
+                dispatch(getcartSuccess(e));
+                // console.log(e)
             })
-
         })
         .catch((err) => {
             const getcartActionerr = getcartFailure();
@@ -69,29 +67,65 @@ export const postcartFailure = () => ({
 });
 
 export const addtoCart = ({ id, qty }) => (dispatch) => {
-    console.log(id, qty, "addtocart")
+    console.log(id, qty, "addtocart");
     let data = {
         userId: "62d64e8120c10042110084af",
         cartproducts: [
-            { productId: id },
-            { quantity: qty },
+            {
+                productId: id,
+                quantity: qty,
+            }
         ]
     }
-    const postcartActionreq = postcartRequest();
-    dispatch(postcartActionreq);
-    return axios.post("http://localhost:5656/cart", data)
-        .then((res) => {
-            const postcartActionres = postcartSuccess(data);
-            dispatch(postcartActionres);
-        })
-        .then(() => alert("Added to cart"))
+    let isUserpresent = axios({
+        url: "http://localhost:5656/cart/find/62d64e8120c10042110084af",
+        method: "GET",
+    }).then((res) => {
+        if (res.data == null) {
+            const postcartActionreq = postcartRequest();
+            dispatch(postcartActionreq);
+            return axios.post("http://localhost:5656/cart", data)
+                .then((res) => {
 
-        .catch((err) => {
-            console.log(err)
-            const postcartActionerr = postcartFailure();
-            dispatch(postcartActionerr);
-            alert("Already in cart")
-        });
+                    const postcartActionres = postcartSuccess(data);
+                    dispatch(postcartActionres);
+                })
+                .then(() => alert("Added to cart"))
+
+                .catch((err) => {
+                    console.log(err)
+                    const postcartActionerr = postcartFailure();
+                    dispatch(postcartActionerr);
+                    alert("Already in cart")
+                });
+        }
+        else {
+            return axios.patch("http://localhost:5656/cart", data)
+                .then((res) => {
+                    if (res.data.message) {
+                        alert(res.data.message)
+                    }
+                    else {
+                        const postcartActionres = postcartSuccess(data);
+                        dispatch(postcartActionres);
+                        alert("Added to cart...")
+                    }
+
+                })
+
+
+                .catch((err) => {
+                    console.log(err)
+                    const postcartActionerr = postcartFailure();
+                    dispatch(postcartActionerr);
+                    alert("Already in cart...")
+                });
+        }
+
+    })
+
+
+
 }
 
 // export const updateqtychrt = async ({ id, qty }) => {
