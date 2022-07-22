@@ -67,7 +67,7 @@ export const postcartFailure = () => ({
 });
 
 export const addtoCart = ({ id, qty }) => (dispatch) => {
-    console.log(id, qty, "addtocart");
+    // console.log(id, qty, "addtocart");
     let data = {
         userId: "62d64e8120c10042110084af",
         cartproducts: [
@@ -93,7 +93,7 @@ export const addtoCart = ({ id, qty }) => (dispatch) => {
                 .then(() => alert("Added to cart"))
 
                 .catch((err) => {
-                    console.log(err)
+                    // console.log(err)
                     const postcartActionerr = postcartFailure();
                     dispatch(postcartActionerr);
                     alert("Already in cart")
