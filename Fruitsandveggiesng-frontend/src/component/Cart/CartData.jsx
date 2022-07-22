@@ -1,4 +1,12 @@
-import { Flex, Box, Heading, Button, useDisclosure } from "@chakra-ui/react";
+import {
+  Flex,
+  Box,
+  Heading,
+  Button,
+  useDisclosure,
+  Center,
+} from "@chakra-ui/react";
+
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import React from "react";
@@ -6,8 +14,8 @@ import { fetchCart, gettotalcartRequest } from "../../Redux/Cart/action";
 // import { options } from "../Payment/Payment";
 import SingleCart from "./SingleCart";
 import { AlertDialogPayment } from "./AlertDialogPayment";
-import { useNavigate } from "react-router-dom";
-import { getsingleproduct } from "../../Redux/Fruits/action";
+import { Link, useSearchParams, useNavigate } from "react-router-dom";
+
 // key-id-  rzp_test_4KpG1twUj3b4p2
 // OVSviQCttEfkGjrjBPxLp3Ui
 
@@ -17,97 +25,35 @@ export default function CartData() {
   const [total, settotal] = useState(0);
   const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  let navigate = useNavigate();
+
+
 
   useEffect(() => {
     if (cart.length == 0) {
-      dispatch(fetchCart());
-      // .then(() => {
-      //   handeltotal();
-      // });
+      dispatch(fetchCart()).then(() => {
+        handeltotal();
+      });
     }
-    dispatch(fetchCart());
-    // .then(() => {
-    //   handeltotal();
-    // });
+    dispatch(fetchCart()).then(() => {
+      handeltotal();
+    });
   }, []);
   console.log(cart, "cart");
-  // useEffect(() => {
-  //   cart.map((e) => {
-  //     dispatch(getsingleproduct(e.productId));
-  //   });
-  // }, []);
 
-  // https://www.freecodecamp.org/news/integrate-a-payment-gateway-in-next-js-and-react-with-razorpay-and-tailwindcss/
-
-  // var instance = new Razorpay({
-  //   key_id: "rzp_test_4KpG1twUj3b4p2",
-  //   key_secret: "OVSviQCttEfkGjrjBPxLp3Ui",
-  // });
-
-  // instance.orders.create({
-  //   amount: `${total * 100}`,
-  //   currency: "INR",
-  //   receipt: "receipt#1",
-  //   // notes: {
-  //   //   key1: "value3",
-  //   //   key2: "value2"
-  //   // }
-  // });
-
-  // console.log(instance.response, "order");
-
-  // const options = {
-  //   key: "rzp_test_4KpG1twUj3b4p2",
-  //   amount: `${total * 100}`, //  = INR 1
-  //   name: "Fruites & Veggies",
-  //   description: "Thankyou for your order",
-  //   image:
-  //     "https://fruitsandveggiesng.com/wp-content/uploads/2021/09/fv_logo-96x61-1.png",
-  //   handler: function (response) {
-  //     console.log(response, "resp");
-  //     alert(response.razorpay_payment_id);
-  //     // navigate("/", { replace: true });
-
-  //     // alert(response.razorpay_order_id);
-  //     // alert(response.razorpay_signature);
-  //   },
-  //   prefill: {
-  //     name: "Tejasvini",
-  //     contact: "7894561230",
-  //     email: "demo@demo.com",
-  //   },
-  //   notes: {
-  //     address: "some address",
-  //   },
-  //   theme: {
-  //     color: "#F37254",
-  //     hide_topbar: false,
-  //   },
-  // };
-  // localStorage.setItem("totalfruitcost", total);
-  // console.log("total", total);
-  // console.log("totalpay", totalpay);
+  useEffect(() => {
+    if (cart.length !== 0 || total == 0) {
+      handeltotal();
+    }
+  }, [cart.length]);
 
   const handeltotal = () => {
-    cart &&
-      cart.map((e) => {
-        settotal((prev) => prev + e.price * e.quantity);
-      });
+    for (let i = 0; i < cart.length; i++) {
+      let x = cart[i].productId.price * cart[i].productId.quantity;
+      settotal((prev) => prev + x);
+    }
     dispatch(gettotalcartRequest(total));
   };
 
-  // const openPayModal = (options) => {
-  //   var rzp1 = new window.Razorpay(options);
-  //   rzp1.open();
-  // };
-
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://checkout.razorpay.com/v1/checkout.js";
-    script.async = true;
-    document.body.appendChild(script);
-  }, []);
 
   return (
     <Flex
@@ -156,7 +102,8 @@ export default function CartData() {
           mr={10}
           mb={5}
         >
-          Total =Rs.{localStorage.getItem("totalfruitcost")}
+          {/* {settotal((prev) => prev + total)} */}
+          Total = {total},{/* Total = {totalpay} */}
         </Heading>
         <Heading
           fontFamily="cursive"
@@ -166,11 +113,8 @@ export default function CartData() {
         >
           Total Cart Items = {cart.length}
         </Heading>
-        <Button
-          bg="#0BC5EA"
-          //  onClick={() => openPayModal(options)}
-        >
-          Proceed to Pay
+        <Button bg="#0BC5EA">
+          <Link to="/address">Proceed to Pay</Link>
         </Button>
       </Box>
     </Flex>

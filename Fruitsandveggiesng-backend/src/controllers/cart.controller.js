@@ -9,7 +9,9 @@ router.get("/", crudController.listAll(Cart));
 //GET ONE--
 router.get("/:id", async (req, res) => {
     try {
-        const cart = await Cart.find({ user_id: req.params.id }).lean().exec();
+        const cart = await Cart.find({ user_id: req.params.id })
+            .populate({ path: "cartproducts.productId", select: ["name"] })
+            .lean().exec();
         return res.status(200).send(cart);
     } catch (err) {
         return res.status(500).send(err.message);
@@ -33,7 +35,8 @@ router.get("/:id", async (req, res) => {
 //GET USER CART---
 router.get("/find/:userId", async (req, res) => {
     try {
-        const cart = await Cart.findOne({ userId: req.params.userId });
+        const cart = await Cart.findOne({ userId: req.params.userId })
+            .populate({ path: "cartproducts.productId" })
         res.status(200).json(cart);
     } catch (err) {
         res.status(500).json(err);
@@ -58,24 +61,24 @@ router.post("/", async (req, res) => {
 });
 
 router.patch("/", async (req, res) => {
-    console.log(req.body, "...")
+    // console.log(req.body, "...")
     try {
-        console.log("A")
+        // console.log("A")
         console.log(req.body.cartproducts, "cartproduct")
         Cart.findOne({ userId: req.body.userId },
             async (err, example) => {
-                console.log("B")
+                // console.log("B")
                 if (err) { return console.error(err) }
                 if (example) {
                     let allcart = example.cartproducts
                     console.log("C", allcart);
                     let falg = true;
                     for (let i = 0; i < allcart.length; i++) {
-                        // console.log("D")
-                        if (allcart[i].productId === req.body.cartproducts[0].productId) {
-                            // console.log("E")
+                        // console.log("D", allcart[i].productId.valueOf())
+                        if (allcart[i].productId.valueOf() === req.body.cartproducts[0].productId) {
+                            console.log("E")
                             falg = false;
-                            // console.log("Already in cartbackend")
+                            console.log("Already in cartbackend")
                             res.send({ message: "Already in cartbackend" });
                             break;
                         }

@@ -25,29 +25,24 @@ export const getcartFailure = () => ({
 });
 
 export const fetchCart = () => (dispatch) => {
-    console.log("hi")
+    // console.log("hi")
     const getcartActionreq = getcartRequest();
     dispatch(getcartActionreq);
-
     return axios({
-        url: "http://localhost:5656/cart/find/62d562e168398ea4dc2c4f59",
+        url: "http://localhost:5656/cart/find/62d64e8120c10042110084af",
         method: "GET",
     })
         .then((res) => {
-            let x = res.data.cartproducts
-            console.log(x, "ax")
-            x.map((e) => {
-                // console.log(e.cartproducts, "a")
-                // console.log(e.userId, e.cartproducts, "responde")
-                const getcartActionres = getcartSuccess(e);
-                dispatch(getcartSuccess(e));
-                // console.log(e)
-            })
+            // console.log(res.data.cartproducts)
+            // let x = res.data.cartproducts
+            const getcartActionres = getcartSuccess(res.data.cartproducts);
+            dispatch(getcartSuccess(res.data.cartproducts));
         })
+
         .catch((err) => {
             const getcartActionerr = getcartFailure();
             dispatch(getcartActionerr);
-            console.log("c")
+            // console.log("c")
             console.log(err, "err")
         });
 };
@@ -81,12 +76,12 @@ export const addtoCart = ({ id, qty }) => (dispatch) => {
         url: "http://localhost:5656/cart/find/62d64e8120c10042110084af",
         method: "GET",
     }).then((res) => {
+        console.log(res.data)
         if (res.data == null) {
             const postcartActionreq = postcartRequest();
             dispatch(postcartActionreq);
             return axios.post("http://localhost:5656/cart", data)
                 .then((res) => {
-
                     const postcartActionres = postcartSuccess(data);
                     dispatch(postcartActionres);
                 })
@@ -100,9 +95,11 @@ export const addtoCart = ({ id, qty }) => (dispatch) => {
                 });
         }
         else {
+            console.log("s")
             return axios.patch("http://localhost:5656/cart", data)
                 .then((res) => {
                     if (res.data.message) {
+                        console.log(res.data.message)
                         alert(res.data.message)
                     }
                     else {
@@ -112,8 +109,6 @@ export const addtoCart = ({ id, qty }) => (dispatch) => {
                     }
 
                 })
-
-
                 .catch((err) => {
                     console.log(err)
                     const postcartActionerr = postcartFailure();

@@ -23,7 +23,7 @@ export const getdataFailure = () => ({
 
 
 export const fetchFruits = ({ filter }) => (dispatch) => {
-    console.log(filter, "paylos")
+    // console.log(filter, "paylos")
     const getdataActionreq = getdataRequest();
     dispatch(getdataActionreq);
     // console.log(`token is`, getState().auth.token);
@@ -65,8 +65,7 @@ export const getsingledataSuccess = (data) => ({
 });
 
 export const getsingleproduct = (id) => (dispatch) => {
-
-    console.log(id, "id")
+    // console.log(id, "id")
     axios({
         url: `http://localhost:5656/fruitsandveggies/${id}`,
         method: "get",

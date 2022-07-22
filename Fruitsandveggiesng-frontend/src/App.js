@@ -7,6 +7,7 @@ import Footer from "./component/Footer/Footer";
 import WishList from "./component/WishList/WishList";
 import CartData from "./component/Cart/CartData";
 import Services from "./component/Home/Services/Services"
+import Address from "./component/Address/Address"
 import UserProfile from "./component/UserProfile/UserProfile";
 import News from "./component/News/News";
 
@@ -29,6 +30,7 @@ function App() {
                 <Route path="/wishlist" element={<WishList />}></Route>
                 <Route path="/cart" element={<CartData />}></Route>
                 <Route path="/newsandgallery" element={<News />}></Route>
+                <Route path="/address" element={<Address />}></Route>
                 <Route path="/contact" element={<div style={top}><Footer /></div>}></Route>
                 <Route path="/services" element={
                     <div style={top}><Services /></div>}></Route>

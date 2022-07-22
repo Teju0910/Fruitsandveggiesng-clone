@@ -18,6 +18,10 @@ app.get("/", async function (req, res) {
   return res.status(200).send("User");
 })
 
+const paymentcontroller = require("./controllers/payment.controller")
+
+app.use("/orders/create", require("./routes/payment"));
+app.use("/orders/pay", paymentcontroller);
 
 app.post("/register",
   body("name")
