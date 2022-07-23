@@ -36,10 +36,7 @@ export const Wishbtn = ({ isfavoutite, id, alldata, update, filter }) => {
           height="10px"
           onClick={() => {
             setwish(!wish);
-            dispatch(updatedatawishlist({ id, wish })).then(() => {
-              console.log("u2");
-              update();
-            });
+            dispatch(updatedatawishlist({ id, wish, filter }));
           }}
         />
       ) : (
@@ -51,10 +48,7 @@ export const Wishbtn = ({ isfavoutite, id, alldata, update, filter }) => {
           height="10px"
           onClick={() => {
             setwish(!isfavoutite);
-            dispatch(updatedatawishlist({ id, wish })).then(() => {
-              console.log("u2");
-              update();
-            });
+            dispatch(updatedatawishlist({ id, wish, filter }));
           }}
         />
       )}

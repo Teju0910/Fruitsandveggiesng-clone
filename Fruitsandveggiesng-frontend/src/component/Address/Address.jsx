@@ -15,7 +15,16 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+const init = {
+  building: "",
+  zipcode: "",
+  city: "",
+  state: "",
+  country: "India",
+};
 export default function Address() {
+  const [address, setaddress] = useState({ init });
+  console.log(address.country);
   let hmac_sha256 = require("crypto-js/hmac-sha256");
   let razorpayOrderId;
   let razorpayPaymentId;
@@ -134,24 +143,13 @@ export default function Address() {
     asdc();
   }
   return (
-    <Stack mt={100} minH={"100vh"} direction={{ base: "column", md: "row" }}>
+    <Stack mt={-100} minH={"100vh"} direction={{ base: "column", md: "row" }}>
       <Flex p={8} flex={1} align={"center"} justify={"center"}>
         <Stack spacing={4} w={"full"} maxW={"md"}>
-          <Heading fontSize={"2xl"}>Shipping Address</Heading>
-          <HStack>
-            <Box>
-              <FormControl id="firstName" isRequired>
-                <FormLabel>First Name</FormLabel>
-                <Input type="text" />
-              </FormControl>
-            </Box>
-            <Box>
-              <FormControl id="lastName">
-                <FormLabel>Last Name</FormLabel>
-                <Input type="text" />
-              </FormControl>
-            </Box>
-          </HStack>
+          <Heading fontSize={"2xl"} color="orangered">
+            Shipping Address
+          </Heading>
+
           <FormControl id="email">
             <FormLabel>Address</FormLabel>
             <Input type="textarea" />
@@ -190,13 +188,6 @@ export default function Address() {
             </Button>
           </Stack>
         </Stack>
-      </Flex>
-      <Flex flex={1}>
-        <Image
-          alt={"Login Image"}
-          objectFit={"cover"}
-          src={"https://im.whatshot.in/img/2020/Jul/grabox-1595330640.jpg"}
-        />
       </Flex>
     </Stack>
   );

@@ -6,16 +6,20 @@ import {
   useDisclosure,
   Center,
 } from "@chakra-ui/react";
-
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import React from "react";
-import { fetchCart, gettotalcartRequest } from "../../Redux/Cart/action";
+import {
+  fetchCart,
+  gettotalcartRequest,
+  removecart,
+} from "../../Redux/Cart/action";
 // import { options } from "../Payment/Payment";
 import SingleCart from "./SingleCart";
 import { AlertDialogPayment } from "./AlertDialogPayment";
 import { Link, useSearchParams, useNavigate } from "react-router-dom";
-
+import { addtoOrder } from "../../Redux/Order/action";
+import Address from "../Address/Address";
 // key-id-  rzp_test_4KpG1twUj3b4p2
 // OVSviQCttEfkGjrjBPxLp3Ui
 
@@ -24,21 +28,14 @@ export default function CartData() {
   const totalpay = useSelector((state) => state.Cart.total);
   const [total, settotal] = useState(0);
   const dispatch = useDispatch();
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
-
 
   useEffect(() => {
     if (cart.length == 0) {
-      dispatch(fetchCart()).then(() => {
-        handeltotal();
-      });
+      Getcartdata();
     }
-    dispatch(fetchCart()).then(() => {
-      handeltotal();
-    });
+    Getcartdata();
   }, []);
-  console.log(cart, "cart");
+  // console.log(cart, "cart");
 
   useEffect(() => {
     if (cart.length !== 0 || total == 0) {
@@ -46,28 +43,35 @@ export default function CartData() {
     }
   }, [cart.length]);
 
-  const handeltotal = () => {
-    for (let i = 0; i < cart.length; i++) {
-      let x = cart[i].productId.price * cart[i].productId.quantity;
-      settotal((prev) => prev + x);
-    }
-    dispatch(gettotalcartRequest(total));
+  const Getcartdata = () => {
+    dispatch(fetchCart()).then(() => {
+      handeltotal();
+    });
   };
 
+  const handeltotal = () => {
+    let tot = 0;
+    for (let i = 0; i < cart.length; i++) {
+      let x = cart[i].productId.price * cart[i].quantity;
+      tot += x;
+    }
+    settotal(tot);
+    dispatch(gettotalcartRequest(total));
+  };
 
   return (
     <Flex
       direction={{ sm: "row", md: "row", base: "column-reverse" }}
       justifyContent="space-evenly"
       maxW={{ xl: "1200px" }}
-      pt={180}
+      pt={150}
       m="0 auto"
       // spaceB
       minH="100vh"
     >
       <Box flex={2}>
         {cart.map((p) => (
-          <SingleCart key={p.name} data={p} />
+          <SingleCart key={p.name} data={p} Getcartdata={Getcartdata} />
         ))}
       </Box>
       <Box
@@ -79,16 +83,16 @@ export default function CartData() {
         h="max-content"
         fontFamily="cursive"
         textAlign="center"
-        border="1px solid #2b88b0bc"
+        border="1px solid #63ffd3bb"
         justifyContent="center"
         borderRadius={10}
-        boxShadow="0 0 1px 1px #3d527dbc, 0 1px 1px #20161626"
+        boxShadow="0 0 1px 1px #17d791bb, 0 1px 1px #ebd2d225"
         _hover={{
           boxShadow: "0 0 1px 2px #e90ac4bb, 0 1px 1px rgba(0, 0, 0, .15)",
         }}
       >
         <Heading
-          color={" #710363b8"}
+          color={" #ff09c6b8"}
           fontFamily="cursive"
           size={{ base: "md", sm: "sm", lg: "md" }}
           mr={10}
@@ -113,9 +117,16 @@ export default function CartData() {
         >
           Total Cart Items = {cart.length}
         </Heading>
-        <Button bg="#0BC5EA">
-          <Link to="/address">Proceed to Pay</Link>
-        </Button>
+        <hr></hr>
+        <Address />
+        {/* <Button
+          bg="#0BC5EA"
+          onClick={() => {
+            dispatch(addtoOrder({ cart }));
+          }}
+        >
+          Add address
+        </Button> */}
       </Box>
     </Flex>
   );

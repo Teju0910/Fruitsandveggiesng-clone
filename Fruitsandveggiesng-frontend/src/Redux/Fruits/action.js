@@ -81,11 +81,15 @@ export const getsingleproduct = (id) => (dispatch) => {
 
 
 
-export const updatedatawishlist = ({ id, wish }) => (dispatch) => {
+export const updatedatawishlist = ({ id, wish,filter }) => (dispatch) => {
     console.log(wish, "oi")
     axios
         .patch(`http://localhost:5656/fruitsandveggies/${id}`, {
             isfavoutite: wish,
+        })
+        .then((res) => {
+            // console.log(res.data, "id")
+            dispatch(fetchFruits({ filter }));
         })
         .catch((err) => {
             console.log(err.message);

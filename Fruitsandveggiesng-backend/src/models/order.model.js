@@ -6,16 +6,18 @@ const OrderSchema = new mongoose.Schema(
     products: [
       {
         productId: {
-          type: String,
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "fruitsandveggies",
+          required: true,
         },
         quantity: {
           type: Number,
-          default: 1,
+          // default: 1,
         },
       },
     ],
     amount: { type: Number, required: true },
-    address: { type: Object, required: true },
+    address: { type: Object },
     status: { type: String, default: "pending" },
   },
   { timestamps: true }

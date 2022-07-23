@@ -13,12 +13,13 @@ import {
 import { Link } from "react-router-dom";
 import { ImCross } from "react-icons/im";
 import { useDispatch } from "react-redux";
-import { deletecart, fetchCart } from "../../Redux/Cart/action";
+import { removecart, fetchCart } from "../../Redux/Cart/action";
 
 // const Fruits = ({ image, name, price }) => {
-const SingleCart = ({ data }) => {
+const SingleCart = ({ data, Getcartdata }) => {
   const dispatch = useDispatch();
   // console.log(data.name, "..");
+
   return (
     <Center>
       <Flex
@@ -31,18 +32,18 @@ const SingleCart = ({ data }) => {
         border="1px solid #eff2f8bd"
         justifyContent="center"
         borderRadius={10}
-        boxShadow="0 0 1px 1px #eff2f8bd, 0 1px 1px rgba(0, 0, 0, .15)"
+        boxShadow="0 0 1px 1px #eff2f8bd, 0 1px 1px #f7f7f726"
         _hover={{
           boxShadow: "0 0 1px 2px #e90ac4bb, 0 1px 1px rgba(0, 0, 0, .15)",
         }}
       >
         <Icon
           as={ImCross}
-          onClick={() =>
-            dispatch(deletecart(data.id)).then(() => {
-              dispatch(fetchCart());
-            })
-          }
+          _hover={{ cursor: "pointer" }}
+          onClick={() => {
+            let id = data._id;
+            dispatch(removecart({ id }));
+          }}
         />
         <Image
           src={data.productId.image}
@@ -55,7 +56,7 @@ const SingleCart = ({ data }) => {
 
         <Box>
           <Heading
-            color=" #3109d3b8"
+            color="orangered"
             size="sm"
             textTransform="capitalize"
             fontFamily="cursive"
@@ -75,7 +76,7 @@ const SingleCart = ({ data }) => {
           </Center>
           <Center>
             <Flex>
-              Quantity - {data.productId.quantity}
+              Quantity - {data.quantity}
               <Box span color="gray.600" fontSize="sm">
                 Kg
               </Box>
@@ -87,7 +88,7 @@ const SingleCart = ({ data }) => {
               <Box span color="gray.600" fontSize="sm">
                 Rs
               </Box>
-              {data.productId.quantity * data.productId.price}
+              {data.quantity * data.productId.price}
             </Flex>
           </Center>
         </Box>

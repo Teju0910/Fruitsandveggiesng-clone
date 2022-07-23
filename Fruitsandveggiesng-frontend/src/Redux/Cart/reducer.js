@@ -9,7 +9,7 @@ const init = {
 
 //{type,payload} =action
 export const CartReducer = (store = init, { type, payload }) => {
-    // console.log(payload, "payleod")
+    // console.log(payload, "cartpayload")
     switch (type) {
         case CartActions.GET_CART_REQUEST: {
             return {

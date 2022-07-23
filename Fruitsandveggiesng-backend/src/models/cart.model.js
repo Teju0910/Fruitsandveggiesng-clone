@@ -7,10 +7,6 @@ const cartSchema = new mongoose.Schema(
     },
     cartproducts: [
       {
-        // productId: {
-        //   type: String,
-        //   unique: true
-        // },
         productId: {
           type: mongoose.Schema.Types.ObjectId,
           ref: "fruitsandveggies",
