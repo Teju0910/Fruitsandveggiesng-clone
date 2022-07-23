@@ -7,14 +7,14 @@ import { Provider } from 'react-redux';
 import { store } from './Redux/store';
 import { extendTheme } from '@chakra-ui/react'
 ReactDOM.render(
-    <React.StrictMode>
-        <Provider store={store}>
-            <BrowserRouter>
-                <ChakraProvider>
-                    <App />
-                </ChakraProvider>
-            </BrowserRouter>
-        </Provider>
-    </React.StrictMode>,
+    // <React.StrictMode>
+    <Provider store={store}>
+        <BrowserRouter>
+            <ChakraProvider>
+                <App />
+            </ChakraProvider>
+        </BrowserRouter>
+    </Provider>,
+    // </React.StrictMode>,
     document.getElementById('root')
 );

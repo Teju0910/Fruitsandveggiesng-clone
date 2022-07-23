@@ -18,10 +18,11 @@ export default function Product() {
       update();
     }
     update();
-  }, [products.length, filt]);
+  }, []);
 
   const update = () => {
-    dispatch(fetchFruits(filt));
+    console.log("updated");
+    dispatch(fetchFruits({ filt }));
   };
   return (
     <Flex
@@ -48,6 +49,7 @@ export default function Product() {
             price={p.price}
             isfavoutite={p.isfavoutite}
             update={update}
+            filter={filt}
           />
         ))}
       </Grid>

@@ -159,14 +159,7 @@ const SingleProduct = () => {
             width="200px"
             bg="#0BC5EA"
             _hover={{ bg: "#f30000", color: "white" }}
-            onClick={
-              handelcart
-
-              // .then(() => {
-              //   dispatch(fetchCart());
-              //   updateqtychrt({ id, qty });
-              // })
-            }
+            onClick={handelcart}
           >
             Add to Cart
           </Button>

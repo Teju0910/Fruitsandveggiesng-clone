@@ -10,9 +10,10 @@ export default function WishList() {
   const products = useSelector((state) => state.Fruits.fruits);
 
   useEffect(() => {
-    // dispatch(getwishlistdata());
+    //  dispatch(getwishlistdata());
   }, [dispatch]);
 
+  console.log(products, "wish");
   return (
     <Flex
       direction="column"
@@ -28,7 +29,7 @@ export default function WishList() {
         gridTemplateColumns="repeat( auto-fit, minmax(300px, 1fr) )"
       >
         {products != [] ? (
-          products?.map(
+          products.data.map(
             (p) =>
               p.isfavoutite == true && (
                 <Fruits

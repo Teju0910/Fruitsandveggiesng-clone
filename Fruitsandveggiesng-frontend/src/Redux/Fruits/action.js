@@ -82,7 +82,7 @@ export const getsingleproduct = (id) => (dispatch) => {
 
 
 export const updatedatawishlist = ({ id, wish }) => (dispatch) => {
-    // console.log(wish, "oi")
+    console.log(wish, "oi")
     axios
         .patch(`http://localhost:5656/fruitsandveggies/${id}`, {
             isfavoutite: wish,

@@ -3,19 +3,27 @@ import { Box } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 // import { addtowishlist, deletewishlist } from "../../Redux/Wishlist/action";
 import {
+  fetchFruits,
   getsingleproduct,
   updatedatawishlist,
 } from "../../Redux/Fruits/action";
 
-export const Wishbtn = ({ isfavoutite, id, alldata, update }) => {
+export const Wishbtn = ({ isfavoutite, id, alldata, update, filter }) => {
   // console.log(isfavoutite, id, "isfavoutite");
   const [wish, setwish] = useState(isfavoutite);
   const onefruit = useSelector((state) => state.Fruits.onefruit);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log("ue1");
+    // update();
     dispatch(getsingleproduct(id));
-  }, [dispatch, wish]);
+  }, [wish]);
+
+  // useEffect(() => {
+  //   console.log("ue2");
+  //   // update();
+  // }, [wish]);
 
   return (
     <Box zIndex="15" width="40px">
@@ -29,7 +37,7 @@ export const Wishbtn = ({ isfavoutite, id, alldata, update }) => {
           onClick={() => {
             setwish(!wish);
             dispatch(updatedatawishlist({ id, wish })).then(() => {
-              console.log("hi", update());
+              console.log("u2");
               update();
             });
           }}
@@ -43,7 +51,10 @@ export const Wishbtn = ({ isfavoutite, id, alldata, update }) => {
           height="10px"
           onClick={() => {
             setwish(!isfavoutite);
-            dispatch(updatedatawishlist({ id, wish }));
+            dispatch(updatedatawishlist({ id, wish })).then(() => {
+              console.log("u2");
+              update();
+            });
           }}
         />
       )}
