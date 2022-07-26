@@ -42,8 +42,8 @@ const Fruits = ({ id, name, image, price, isfavoutite, alldata, update }) => {
       />
       <Box>
         <Heading
-          color="black"
-          size="md"
+          color=" #000000b8"
+          size="2sm"
           textTransform="capitalize"
           fontFamily="cursive"
           _hover={{

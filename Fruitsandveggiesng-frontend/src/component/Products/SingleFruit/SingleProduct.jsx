@@ -32,6 +32,7 @@ const SingleProduct = () => {
   const [qty, setqty] = useState(1);
   const [wish, setwish] = useState(false);
   const dispatch = useDispatch();
+  let userget = JSON.parse(localStorage.getItem("fruitaccessuser"));
 
   // console.log(singlepro, "singlepro");
   const { id } = useParams();
@@ -53,7 +54,15 @@ const SingleProduct = () => {
   };
 
   const handelcart = () => {
-    dispatch(addtoCart({ id, qty }));
+    let x = JSON.parse(localStorage.getItem("fruitaccessuser"));
+
+    if (!x || x == "") {
+      alert("Please Login First");
+    } else {
+      let userget = x._id;
+      console.log(userget, "x");
+      dispatch(addtoCart({ id, qty, userget }));
+    }
   };
   return (
     <Box
@@ -72,10 +81,10 @@ const SingleProduct = () => {
                 image: `${pro.image}`,
               },
               {
-                image: `${pro.image}`,
+                image: `${pro.image1}`,
               },
               {
-                image: `${pro.image}`,
+                image: `${pro.image2}`,
               },
             ]}
             time={3000}
@@ -101,14 +110,16 @@ const SingleProduct = () => {
             }}
           />
         </Box>
-        <Box p={10} textAlign="center" justifyContent="center">
+        <Box p={5} textAlign="center" justifyContent="center">
           <Flex>
             <Heading
               as="h1"
-              size="2xl"
+              // size={{ base: "xl", md: "xl", sm: "xl", xs: "xl" }}
+              size="md"
               id="title"
-              fontFamily="cursive"
-              p={8}
+              // fontFamily="cursive"
+              p={10}
+              // width={90}
               textTransform={"uppercase"}
             >
               {pro.name}

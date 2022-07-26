@@ -62,20 +62,14 @@ function Navbar() {
   let reduxtoken = "";
   const cart = useSelector((state) => state.Cart.cart);
   const products = useSelector((state) => state.Fruits.fruits);
+  let userget;
   // console.log(token, "token");
   useEffect(() => {
     dispatch(fetchFruits({ filter }));
-    dispatch(fetchCart());
+    dispatch(fetchCart({ userget }));
     dispatch(getdataSuccess({ filter }));
   }, [dispatch, filter]);
 
-  const handelwishlist = () => {
-    products
-      .map((p) => {
-        p.isfavoutite == true && wish++;
-      })
-      .then(setwish(wish));
-  };
   const navigation = [
     { title: "Home", to: "/" },
     { title: "About F & V", to: "/about" },
@@ -91,6 +85,15 @@ function Navbar() {
 
   const handelhideshow = () => {
     sethide(!hide);
+  };
+
+  const handel = () => {
+    let x = JSON.parse(localStorage.getItem("fruitaccessuser"));
+    if (!x || x == "") {
+      alert("Please Login First");
+    } else {
+      userget = x;
+    }
   };
 
   const handellogout = () => {
@@ -135,7 +138,7 @@ function Navbar() {
                       Products
                     </MenuButton>
                   </Link>
-                  <MenuList alignItems="start">
+                  {/* <MenuList alignItems="start">
                     <MenuItem onClick={() => setfilter("")}>All</MenuItem>
                     <MenuItem onClick={() => setfilter("Fruits")}>
                       Fresh Fruits
@@ -146,7 +149,7 @@ function Navbar() {
                     <MenuItem onClick={() => setfilter("HerbsandSpices")}>
                       Herbs and Spices
                     </MenuItem>
-                  </MenuList>
+                  </MenuList> */}
                 </Menu>
               </Tab>
             ) : (
@@ -159,7 +162,7 @@ function Navbar() {
           <Tab>
             <Icon as={VscSearch} />
           </Tab>
-          <Tab>
+          <Tab onClick={handel}>
             <Link to="/cart">
               <div className="header-cart">
                 <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" />

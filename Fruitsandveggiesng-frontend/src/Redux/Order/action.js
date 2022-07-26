@@ -23,21 +23,21 @@ export const getorderFailure = () => ({
     type: OrderActions.GET_ORDER_FAILURE
 });
 
-export const fetchOrder = () => (dispatch) => {
-    // console.log("hi")
+export const fetchOrder = ({ userget }) => (dispatch) => {
+    console.log("hi", userget)
+    let userId = userget
     const getorderActionreq = getorderRequest();
     dispatch(getorderActionreq);
     return axios({
-        url: "http://localhost:5656/order/find/62d64e8120c10042110084af",
+        url: `http://localhost:5656/order/find/${userId}`,
         method: "GET",
     })
         .then((res) => {
-            console.log(res.data.orderproducts, "action")
+            console.log(res.data, "ac.tion")
             // let x = res.data.orderproducts
-            const getorderActionres = getorderSuccess(res.data.orderproducts);
-            dispatch(getorderSuccess(res.data.orderproducts));
+            const getorderActionres = getorderSuccess(res.data);
+            dispatch(getorderSuccess(res.data));
         })
-
         .catch((err) => {
             const getorderActionerr = getorderFailure();
             dispatch(getorderActionerr);
@@ -62,18 +62,20 @@ export const postorderFailure = () => ({
 
 
 
-export const addtoOrder = ({ cart }) => (dispatch) => {
+export const addtoOrder = ({ cart, address, amount, user }) => (dispatch) => {
     console.log(cart, "addtoorder");
     let data = {
-        userId: "62d64e8120c10042110084af",
-        orderproducts: cart,
+        userId: user,
+        products: cart,
+        amount: amount,
+        address: address,
     }
     let isUserpresent = axios({
-        url: "http://localhost:5656/order/find/62d64e8120c10042110084af",
+        url: `http://localhost:5656/order/find/${user}`,
         method: "GET",
     }).then((res) => {
-        console.log(res.data)
-        if (res.data == null) {
+        // console.log(res.data, "addtoorder")
+        if (res.data) {
             const postorderActionreq = postorderRequest();
             dispatch(postorderActionreq);
             return axios.post("http://localhost:5656/order", data)
@@ -81,36 +83,12 @@ export const addtoOrder = ({ cart }) => (dispatch) => {
                     const postorderActionres = postorderSuccess(data);
                     dispatch(postorderActionres);
                 })
-                .then(() => alert("Added to order"))
+                .then(() => dispatch(fetchOrder({ user })))
                 .catch((err) => {
                     // console.log(err)
                     const postorderActionerr = postorderFailure();
                     dispatch(postorderActionerr);
-                    alert("Already in order")
-                });
-        }
-        else {
-            console.log("s")
-            return axios.patch("http://localhost:5656/order", data)
-                .then((res) => {
-                    if (res.data.message) {
-                        console.log(res.data.message)
-                        alert(res.data.message)
-                    }
-                    else {
-                        const postorderActionres = postorderSuccess(data);
-                        dispatch(postorderActionres);
-                        alert("Added to order...")
-                    }
-                })
-                .then(() => {
-                    dispatch(fetchOrder())
-                })
-                .catch((err) => {
-                    console.log(err)
-                    const postorderActionerr = postorderFailure();
-                    dispatch(postorderActionerr);
-                    alert("Already in order...")
+
                 });
         }
     })

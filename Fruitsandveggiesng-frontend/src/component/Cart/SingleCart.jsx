@@ -18,8 +18,17 @@ import { removecart, fetchCart } from "../../Redux/Cart/action";
 // const Fruits = ({ image, name, price }) => {
 const SingleCart = ({ data, Getcartdata }) => {
   const dispatch = useDispatch();
+  let userget;
   // console.log(data.name, "..");
-
+  const handel = () => {
+    let x = JSON.parse(localStorage.getItem("fruitaccessuser"))._id;
+    if (!x || x == "") {
+      alert("Please Login First");
+    } else {
+      userget = x;
+    }
+  };
+  handel();
   return (
     <Center>
       <Flex
@@ -42,7 +51,7 @@ const SingleCart = ({ data, Getcartdata }) => {
           _hover={{ cursor: "pointer" }}
           onClick={() => {
             let id = data._id;
-            dispatch(removecart({ id }));
+            dispatch(removecart({ id, userget }));
           }}
         />
         <Image

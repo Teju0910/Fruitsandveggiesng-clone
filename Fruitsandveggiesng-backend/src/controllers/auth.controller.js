@@ -43,28 +43,28 @@ const register = async (req, res) => {
       from: '"fruit&veggies admin" <fruit&veggies@gmail.com>', // sender address
       to: `${user.email}`, // list of receivers
       subject: `Welcome to Fruit & Veggies, ${user.name}`, // Subject line
-      // text: "Hello sir/madam, Your account is creatrd successfully, on Revv", // plain text body
       html: `
         <p>Dear ${user.name}!</p>
-        <p>Thanks for choosing Revv!</p>
-        <p>We are excited to have you on-board, and look forward to delivering a fantastic mobility experience. 
-            It is a whole new world of privacy, freedom and convenience - just like your own car!
+        <p>Thanks for choosing Fruit & Veggies!</p>
+        <p>We are excited to have you on-board, and look forward to delivering a fresh fruits and vegetable . 
+        Choose From a Wide Variety Of Exotic Fruits & Vegetables At Fruit & Veggies.
             <br><br>          
-            We are excited to have you on-board, and look forward to delivering a fantastic mobility experience. It is a whole new world of privacy, freedom and convenience - just like your own car!
+            Don't have the time to go grocery shopping? Buy organic vegetables & fresh fruits online!
     <br><br>
-            When you make your first booking with us, we will send you a password to this email id, which you can use to make your account secure. This will not be required if you are using Facebook/Google login.
+    Fresh, Tasty, Quality Fruit & Veg, delivered to your door. 
             <br>   <br>   
-            Should you need any further assistance, contact us at care@revv.co.in, or call us on +91 9250035555.
+            Should you need any further assistance, contact us at care@fruits.co.in, or call us on +91 9250035555.
             <br>  <br>     
-            Look forward to see you again at Revv.
+            Look forward to see you again at Fruits & Vegetables.
             <br> <br>     
-            Team @ Revv   
+            Team @ Fruites&Veggies
             <br><br>   
         </p>
+        <img src="https://fruitsandveggiesng.com/wp-content/uploads/2021/09/fv_logo-96x61-1.png"/>
 `, // html body
     }
     // console.log("c")
-
+    res.status(200).send({ user, token, status });
     const result = await transporter.sendMail(mailoptions)
     if (result) {
       console.log("Email sent")
@@ -72,7 +72,7 @@ const register = async (req, res) => {
     else {
       console.log("Email not sent")
     }
-    return res.status(200).send({ user, token, status });
+    // return res.status(200).send({ user, token, status });
   }
   catch (err) {
     console.log({ message: err.message })
@@ -83,7 +83,7 @@ const register = async (req, res) => {
 
 
 const login = async (req, res) => {
-   console.log(req.body, "log")
+  console.log(req.body, "log")
   try {
     const user = await User.findOne({ email: req.body.email })
     //checked if mail exists

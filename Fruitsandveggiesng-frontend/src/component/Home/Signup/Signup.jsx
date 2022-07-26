@@ -33,20 +33,21 @@ function Signup({ isOpen, onClose, cancelRef, handelhideshow }) {
   const [email, setemail] = useState("");
   const [password, setpass] = useState("");
   const [username, setusername] = useState("");
+  const [mobileNumber, setmobileNumber] = useState(0);
   const ref = useRef();
   const handleShowClick = () => setShowPassword(!showPassword);
   const navigate = useNavigate();
-
 
   const submitsignup = async () => {
     axios
       .post("http://localhost:5656/register", {
         name: username,
         email: email,
+        mobileNumber: mobileNumber.toString(),
         password: password,
       })
       .then((res) => {
-        console.log(res, "res");
+        console.log(res, "res..");
         alert("Signup successfully");
         handelhideshow();
         // navigate("/");
@@ -109,6 +110,19 @@ function Signup({ isOpen, onClose, cancelRef, handelhideshow }) {
                         type="email"
                         onChange={(e) => setemail(e.target.value)}
                         placeholder="email address"
+                      />
+                    </InputGroup>
+                  </FormControl>
+                  <FormControl>
+                    <InputGroup>
+                      <InputLeftElement
+                        pointerEvents="none"
+                        children={<CFaUserAlt color="gray.300" />}
+                      />
+                      <Input
+                        type="number"
+                        onChange={(e) => setmobileNumber(e.target.value)}
+                        placeholder="Mobile Number"
                       />
                     </InputGroup>
                   </FormControl>

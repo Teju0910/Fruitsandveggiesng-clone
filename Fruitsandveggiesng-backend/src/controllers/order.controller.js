@@ -11,7 +11,7 @@ const router = require("express").Router();
 
 //CREATE---
 router.post("/", async (req, res) => {
-  // console.log(req.body, "order")
+  //  console.log(req.body, "order")
   const newOrder = new Order(req.body);
   try {
     const savedOrder = await newOrder.save();
@@ -25,13 +25,12 @@ router.post("/", async (req, res) => {
 router.patch("/:id", crudController.updateById(Order));
 
 //DELETE---
-router.delete("/:id", crudController.deleteById(Order));
 
 //GET USER ORDERS
 router.get("/find/:userId", async (req, res) => {
   try {
     const orders = await Order.find({ userId: req.params.userId })
-      .populate({ path: "cartproducts.productId" })
+      .populate({ path: "products.productId" })
     res.status(200).json(orders);
   } catch (err) {
     res.status(500).json(err);

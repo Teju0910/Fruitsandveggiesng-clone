@@ -10,11 +10,14 @@ import {
   HStack,
   Box,
   Image,
+  AlertDescription,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import { addtoOrder } from "../../Redux/Order/action";
+import { deletecart } from "../../Redux/Cart/action";
 const init = {
   building: "",
   zipcode: "",
@@ -22,9 +25,37 @@ const init = {
   state: "",
   country: "India",
 };
-export default function Address() {
-  const [address, setaddress] = useState({ init });
-  console.log(address.country);
+export default function Address({ cart, amount }) {
+  const [address, setaddress] = useState(init);
+  const dispatch = useDispatch();
+  let userget = JSON.parse(localStorage.getItem("fruitaccessuser"));
+  let user = userget._id;
+  const handelchange = (e) => {
+    let { id, value } = e.target;
+    setaddress({ ...address, [id]: value });
+  };
+
+  const handelpayment = () => {
+    if (
+      address.building == "" ||
+      address.zipcode == "" ||
+      address.city == "" ||
+      address.state == ""
+    ) {
+      alert("Please fill all Address Information");
+      return;
+    } else {
+      displayRazorpay().then((res) => {
+        console.log(res, "ree");
+      });
+      dispatch(addtoOrder({ cart, address, amount, user }));
+      dispatch(deletecart("62d64e8120c10042110084af"));
+    }
+  };
+
+  console.log(address, "add");
+  console.log(amount, "amount");
+
   let hmac_sha256 = require("crypto-js/hmac-sha256");
   let razorpayOrderId;
   let razorpayPaymentId;
@@ -63,7 +94,7 @@ export default function Address() {
 
     let x;
     const result = await axios
-      .post("http://localhost:5656/orders/create")
+      .post("http://localhost:5656/orders/create", { amount })
       .then((res) => {
         // var { amount, id: order_id, currency } = res.data;
         x = res.data;
@@ -75,20 +106,20 @@ export default function Address() {
       .catch((err) => {
         console.log(err, "res");
       });
-    // console.log(result.data, "trsult")
+    console.log(x, "trsult");
 
     // if (!result.data) {
     //   alert("Server error. Are you online?");
     //   return;
     // }
 
-    const { amount, id: order_id, currency } = x;
+    const { id: order_id } = x;
     console.log("a");
 
     const options = {
       key: "rzp_test_4KpG1twUj3b4p2",
       amount: amount.toString(),
-      currency: currency,
+      currency: "INR",
       name: "Fruits and Veggies",
       description: "Test Transaction",
       image:
@@ -104,17 +135,20 @@ export default function Address() {
         console.log("b");
         const result = await axios
           .post("http://localhost:5656/orders/pay", data)
+          // .then(() => {
+          //   dispatchEvent(addtoOrder({ cart, address, amount }));
+          // })
           .then((res) => {
             console.log(res, "data");
-            alert("Payment Done");
-            navigate("/", { replace: true });
+            // alert("Payment Done");
+            navigate("/waiting", { replace: true });
           });
       },
       callback_url: "http://localhost:5656",
       prefill: {
-        name: "Tejasvini Patil",
-        email: "tvpatil@gmail.com",
-        contact: "9999999999",
+        name: userget.name,
+        email: userget.email,
+        contact: userget.mobileNumber,
       },
       notes: {
         address: "Pune",
@@ -152,25 +186,25 @@ export default function Address() {
 
           <FormControl id="email">
             <FormLabel>Address</FormLabel>
-            <Input type="textarea" />
+            <Input type="textarea" onChange={handelchange} id="building" />
           </FormControl>
           <HStack>
             <Box>
               <FormControl id="firstName" isRequired>
                 <FormLabel>Zip Code</FormLabel>
-                <Input type="text" />
+                <Input type="text" onChange={handelchange} id="zipcode" />
               </FormControl>
             </Box>
             <Box>
               <FormControl id="lastName">
                 <FormLabel>City</FormLabel>
-                <Input type="text" />
+                <Input type="text" onChange={handelchange} id="city" />
               </FormControl>
             </Box>
             <Box>
               <FormControl id="lastName">
                 <FormLabel>State</FormLabel>
-                <Input type="text" />
+                <Input type="text" onChange={handelchange} id="state" />
               </FormControl>
             </Box>
           </HStack>
@@ -180,7 +214,7 @@ export default function Address() {
           </FormControl>
           <Stack spacing={6}>
             <Button
-              onClick={displayRazorpay}
+              onClick={handelpayment}
               colorScheme={"blue"}
               variant={"solid"}
             >

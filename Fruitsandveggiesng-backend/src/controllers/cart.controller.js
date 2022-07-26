@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const crudController = require("./crud.controller");
 const Cart = require("../models/cart.model");
+const authenticate = require("../middlewares/authenticate");
 
 //GET ALL--
 router.get("/", crudController.listAll(Cart));
@@ -33,8 +34,7 @@ router.get("/find/:userId", async (req, res) => {
     }
 });
 
-///DELETE---
-
+///  -------- DELETE -------
 router.put("/removecart", (req, res) => {
     //find the user by the id parameter first, then locate and remove the post specified by the id in req.body 
     console.log(req.body, "res")
@@ -73,7 +73,7 @@ router.post("/", async (req, res) => {
     const newCart = new Cart(req.body);
     try {
         const savedCart = await newCart.save()
-            .populate({ path: "cartproducts.productId", select: ["price"] })
+        // .populate({ path: "cartproducts.productId", select: ["price"] })
         res.status(200).json(savedCart);
     } catch (err) {
         res.status(500).json(err);
@@ -81,7 +81,7 @@ router.post("/", async (req, res) => {
 });
 
 router.patch("/", async (req, res) => {
-    // console.log(req.body, "...")
+    console.log(req.body, "...")
     try {
         // console.log("A")
         // console.log(req.body.cartproducts, "cartproduct")
@@ -127,6 +127,19 @@ router.patch("/", async (req, res) => {
         res.status(500).json(err);
     }
 })
+
+
+router.delete("/", async (req, res) => {
+
+    try {
+        await Cart.deleteMany();
+        console.log('All Data successfully deleted');
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+
 
 
 module.exports = router;

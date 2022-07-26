@@ -55,33 +55,28 @@ app.post("/register",
         throw new Error("Password must be strong");
       }
       return true;
-    })
-  // body("mobileNumber").custom((value) => {
-  //   if (value && value.length != 10 ) {
-  //     throw new Error("Mobile Number must be 10 digits");
-  //   }
-  //   return true;
-  // })
+    }),
+
+  body("mobileNumber").custom((value) => {
+    if (value && value.length != 10) {
+      throw new Error("Mobile Number must be 10 digits");
+    }
+    return true;
+  })
 
   , register)
-
-
 app.post("/login", login)
 
 
 
 const productController = require("./controllers/product.controller");
-
 const cartController = require("./controllers/cart.controller");
 const orderController = require("./controllers/order.controller");
 
-// const queryController = require('./controllers/query.controller');
 
 app.use("/fruitsandveggies", productController);
 app.use("/order", orderController);
 app.use("/cart", cartController);
 console.log("z")
-// app.use("/locations", locationController);
 
-// app.use("/q", queryController);
 module.exports = app;

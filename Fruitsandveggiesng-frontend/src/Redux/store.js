@@ -5,13 +5,14 @@ import thunk from "redux-thunk";
 import { CartReducer } from "./Cart/reducer";
 import { FilterReducer } from "./Filter/reducer";
 import { UserReducer } from "./User/reducer";
+import { OrderReducer } from "./Order/reducer";
 
 const rootReducers = combineReducers({
     Fruits: FruitsReducer,
     Filter: FilterReducer,
     Cart: CartReducer,
     User: UserReducer,
-    // Wishlist: WishlistReducer,
+    Order: OrderReducer,
 })
 
 

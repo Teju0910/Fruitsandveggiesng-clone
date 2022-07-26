@@ -66,7 +66,7 @@ export const FilterComponent = () => {
           value=""
           onClick={() => setfilter("")}
         >
-          All (5)
+          All (16)
         </Text>
         <hr></hr>
         <Text
@@ -75,7 +75,7 @@ export const FilterComponent = () => {
           p={2}
           onClick={() => setfilter("Fruits")}
         >
-          Fruits (5)
+          Fruits (6)
         </Text>
         <hr></hr>
         <Text
@@ -84,7 +84,7 @@ export const FilterComponent = () => {
           p={2}
           onClick={() => setfilter("HerbsandSpices")}
         >
-          Herbs and Spices (3)
+          Herbs and Spices (5)
         </Text>
         <hr></hr>
         <Text
@@ -93,7 +93,7 @@ export const FilterComponent = () => {
           p={2}
           onClick={() => setfilter("Vegetables")}
         >
-          Vegetables (3)
+          Vegetables (5)
         </Text>
         <hr></hr>
       </Box>
