@@ -51,15 +51,16 @@ export default function CartData() {
   };
 
   const handel = () => {
-    let x = JSON.parse(localStorage.getItem("fruitaccessuser"))._id;
+    let x = JSON.parse(localStorage.getItem("fruitaccessuser"));
     if (!x || x == "") {
-      alert("Please Login First");
+      // alert("Please Login First");
     } else {
-      userget = x;
+      userget = x._id;
       console.log(userget, "grtid");
     }
   };
   handel();
+
   const handeltotal = () => {
     let tot = 0;
     for (let i = 0; i < cart.length; i++) {
@@ -90,9 +91,10 @@ export default function CartData() {
         </Center>
       )}
       <Box flex={2}>
-        {cart.map((p) => (
-          <SingleCart key={p.name} data={p} Getcartdata={Getcartdata} />
-        ))}
+        {cart &&
+          cart.map((p) => (
+            <SingleCart key={p.name} data={p} Getcartdata={Getcartdata} />
+          ))}
       </Box>
       <Box
         flex={1}
@@ -139,14 +141,6 @@ export default function CartData() {
         </Heading>
         <hr></hr>
         <Address cart={cart} amount={total} />
-        {/* <Button
-          bg="#0BC5EA"
-          onClick={() => {
-            dispatch(addtoOrder({ cart }));
-          }}
-        >
-          Add address
-        </Button> */}
       </Box>
     </Flex>
   );

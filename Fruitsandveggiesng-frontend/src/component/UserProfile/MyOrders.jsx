@@ -3,18 +3,25 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import React from "react";
 import { fetchOrder } from "../../Redux/Order/action";
+import { createPath } from "react-router-dom";
 
 export default function MyOrders() {
   const order = useSelector((state) => state.Order.order);
   const dispatch = useDispatch();
   let userget = JSON.parse(localStorage.getItem("fruitaccessuser"))._id;
-
   console.log(userget, "userget");
+
   useEffect(() => {
-    if (order.length == 0) {
-      dispatch(fetchOrder({ userget }));
+    console.log("z");
+    if (order.length == 0 || order == []) {
+      console.log("a");
+      dispatch(fetchOrder(userget));
+      console.log("b");
+    } else {
+      console.log("c");
+      dispatch(fetchOrder(userget));
+      console.log("d");
     }
-    dispatch(fetchOrder({ userget }));
   }, []);
 
   console.log(order, "order");
@@ -100,30 +107,30 @@ export default function MyOrders() {
           <Box p={10}>
             <Text>
               <span style={{ color: "Red" }}>Booking Time :- </span>
-              {order[0].createdAt}
+              {order[0] && order[0].createdAt}
             </Text>
             <Text>
               <span style={{ color: "Red" }}>Total Paid :-</span>{" "}
-              {order[0].amount}
+              {order[0] && order[0].amount}
             </Text>
             <Text>
               <span style={{ color: "Red" }}> Address :-</span>{" "}
             </Text>
             <Text>
               <span style={{ color: "#0e8843" }}>building/House No -</span>
-              {order[0].address.building}
+              {order[0] && order[0].address.building}
             </Text>
             <Text>
               <span style={{ color: "#0e8843" }}>City -</span>
-              {order[0].address.city}
+              {order[0] && order[0].address.city}
             </Text>
             <Text>
               <span style={{ color: "#0e8843" }}> State -</span>
-              {order[0].address.state}
+              {order[0] && order[0].address.state}
             </Text>
             <Text>
               <span style={{ color: "#0e8843" }}> PinCode -</span>
-              {order[0].address.zipcode}
+              {order[0] && order[0].address.zipcode}
             </Text>
             <Text>
               <span style={{ color: "#0e8843" }}> Status -</span>

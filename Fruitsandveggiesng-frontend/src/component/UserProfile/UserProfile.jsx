@@ -16,6 +16,7 @@ import { fetchCart } from "../../Redux/Cart/action";
 import { fetchUser } from "../../Redux/User/action";
 import MyOrders from "./MyOrders";
 
+
 export default function UserProfile() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.User.user);
@@ -105,7 +106,7 @@ export default function UserProfile() {
         </Box>
       </Center>
 
-      <MyOrders />
+      <MyOrders/>
     </Box>
   );
 }

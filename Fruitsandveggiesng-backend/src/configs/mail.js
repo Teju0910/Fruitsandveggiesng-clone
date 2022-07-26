@@ -4,7 +4,7 @@ require('dotenv').config();
 const YOUR_CLIENT_ID = process.env.YOUR_CLIENT_ID;
 const YOUR_CLIENT_SECRET = process.env.YOUR_CLIENT_SECRET;
 const YOUR_REDIRECT_URL = process.env.YOUR_REDIRECT_URL;
-const refresh_token = refresh_token = process.env.refresh_token;
+const refresh_token = process.env.refresh_token;
 const MAIL = process.env.MAIL
 const PASS = process.env.PASS
 //ya29.A0AVA9y1s_51Fs6LTrsyTb0rXAZimoR0dSMyHJQisXAXW0D5Fft2LCKgBwfqoQ8MpguNYg0EkYOsZ8niHF7njENkkdifWbpWPKyXyGliahS5HV3M1U5HZZrcJHVanvj_W9w3W0PQ5g9fip2f5yLu48bHOkZEaqYUNnWUtBVEFTQVRBU0ZRRTY1ZHI4ZUhtVlFsaWhSRS1VRlJwWUkySklOZw0163

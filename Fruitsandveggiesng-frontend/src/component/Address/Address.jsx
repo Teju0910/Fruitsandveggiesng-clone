@@ -28,8 +28,21 @@ const init = {
 export default function Address({ cart, amount }) {
   const [address, setaddress] = useState(init);
   const dispatch = useDispatch();
-  let userget = JSON.parse(localStorage.getItem("fruitaccessuser"));
-  let user = userget._id;
+  let userget;
+  let user;
+
+  const handel = () => {
+    let x = JSON.parse(localStorage.getItem("fruitaccessuser"));
+    if (!x || x == "") {
+      // alert("Please Login First");
+    } else {
+      userget = x;
+      user = x._id;
+      console.log(userget, "grtid");
+    }
+  };
+  handel();
+
   const handelchange = (e) => {
     let { id, value } = e.target;
     setaddress({ ...address, [id]: value });

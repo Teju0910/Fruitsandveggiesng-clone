@@ -23,13 +23,12 @@ export const getorderFailure = () => ({
     type: OrderActions.GET_ORDER_FAILURE
 });
 
-export const fetchOrder = ({ userget }) => (dispatch) => {
+export const fetchOrder = (userget) => (dispatch) => {
     console.log("hi", userget)
-    let userId = userget
     const getorderActionreq = getorderRequest();
     dispatch(getorderActionreq);
     return axios({
-        url: `http://localhost:5656/order/find/${userId}`,
+        url: `http://localhost:5656/order/find/${userget}`,
         method: "GET",
     })
         .then((res) => {
@@ -83,7 +82,7 @@ export const addtoOrder = ({ cart, address, amount, user }) => (dispatch) => {
                     const postorderActionres = postorderSuccess(data);
                     dispatch(postorderActionres);
                 })
-                .then(() => dispatch(fetchOrder({ user })))
+                // .then(() => dispatch(fetchOrder({ user })))
                 .catch((err) => {
                     // console.log(err)
                     const postorderActionerr = postorderFailure();
@@ -96,20 +95,7 @@ export const addtoOrder = ({ cart, address, amount, user }) => (dispatch) => {
 
 
 
-export const removeorder = ({ id }) => (dispatch) => {
-    // console.log(id, "oi")
-    const res = axios
-        .put(`http://localhost:5656/order/removeorder`, {
-            productId: id,
-            userId: "62d64e8120c10042110084af",
-        })
-        .then(() => {
-            dispatch(fetchOrder())
-        })
-        .catch((err) => {
-            console.log(err.message);
-        });
-};
+
 
 export const gettotalorderRequest = (total) => ({
     type: OrderActions.GET_TOTALORDER_SUCCESS,
