@@ -1,27 +1,25 @@
 import { Flex, Grid, Stack } from "@chakra-ui/react";
 import Fruits from "./Fruits/Fruits";
-import { useContext, useEffect, useState } from "react";
-import { getdata } from "../Home/Data/fetchdata";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchFruits } from "../../Redux/Fruits/action";
-
 import { FilterComponent } from "./FilterComponent";
 
 export default function Product() {
   const dispatch = useDispatch();
   const filt = useSelector((state) => state.Filter.filter);
   const products = useSelector((state) => state.Fruits.fruits);
-  // console.log(products, "sotrese");
 
   useEffect(() => {
-    if (products.length == 0) {
+    if (products?.length === 0) {
       update();
     }
-    update();
-  }, []);
+    // update();
+  }, [dispatch, filt]);
+  console.log(products, "sotrese");
 
   const update = () => {
-    console.log("updated");
+    // console.log("updated");
     dispatch(fetchFruits({ filt }));
   };
   return (
@@ -39,19 +37,20 @@ export default function Product() {
         gridGap="5"
         gridTemplateColumns="repeat( auto-fit, minmax(250px, 1fr) )"
       >
-        {products.data.map((p) => (
-          <Fruits
-            alldata={p}
-            key={p._id}
-            id={p._id}
-            name={p.name}
-            image={p.image}
-            price={p.price}
-            isfavoutite={p.isfavoutite}
-            update={update}
-            filter={filt}
-          />
-        ))}
+        {products.data &&
+          products.data.map((p) => (
+            <Fruits
+              alldata={p}
+              key={p._id}
+              id={p._id}
+              name={p.name}
+              image={p.image}
+              price={p.price}
+              isfavoutite={p.isfavoutite}
+              update={update}
+              filter={filt}
+            />
+          ))}
       </Grid>
     </Flex>
   );

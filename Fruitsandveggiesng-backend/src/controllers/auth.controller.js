@@ -65,13 +65,14 @@ const register = async (req, res) => {
     }
     // console.log("c")
     res.status(200).send({ user, token, status });
-    const result = await transporter.sendMail(mailoptions)
-    if (result) {
-      console.log("Email sent")
-    }
-    else {
-      console.log("Email not sent")
-    }
+    // const result = await transporter.sendMail(mailoptions)
+    // console.log(result, "result")
+    // if (result) {
+    //   console.log("Email sent")
+    // }
+    // else {
+    //   console.log("Email not sent")
+    // }
     // return res.status(200).send({ user, token, status });
   }
   catch (err) {

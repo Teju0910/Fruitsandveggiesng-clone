@@ -107,7 +107,7 @@ export default function Address({ cart, amount }) {
 
     let x;
     const result = await axios
-      .post("http://localhost:5656/orders/create", { amount })
+      .post("https://fruitsandveggies.herokuapp.com/orders/create", { amount })
       .then((res) => {
         // var { amount, id: order_id, currency } = res.data;
         x = res.data;
@@ -147,7 +147,7 @@ export default function Address({ cart, amount }) {
         };
         console.log("b");
         const result = await axios
-          .post("http://localhost:5656/orders/pay", data)
+          .post("https://fruitsandveggies.herokuapp.com/orders/pay", data)
           // .then(() => {
           //   dispatchEvent(addtoOrder({ cart, address, amount }));
           // })
@@ -157,7 +157,7 @@ export default function Address({ cart, amount }) {
             navigate("/waiting", { replace: true });
           });
       },
-      callback_url: "http://localhost:5656",
+      callback_url: "https://fruitsandveggies.herokuapp.com",
       prefill: {
         name: userget.name,
         email: userget.email,

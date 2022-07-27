@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios from "../../axios/axios";
+
 export const CartActions = {
     GET_CART_REQUEST: "GET_CART_REQUEST",
     GET_CART_SUCCESS: "GET_CART_SUCCESS",
@@ -28,7 +29,7 @@ export const fetchCart = ({ userget }) => (dispatch) => {
     const getcartActionreq = getcartRequest();
     dispatch(getcartActionreq);
     return axios({
-        url: `http://localhost:5656/cart/find/${userget}`,
+        url: `/cart/find/${userget}`,
         method: "GET",
     })
         .then((res) => {
@@ -72,14 +73,14 @@ export const addtoCart = ({ id, qty, userget }) => (dispatch) => {
         ]
     }
     let isUserpresent = axios({
-        url: `http://localhost:5656/cart/find/${userget}`,
+        url: `/cart/find/${userget}`,
         method: "GET",
     }).then((res) => {
         console.log(res.data)
         if (res.data == null) {
             const postcartActionreq = postcartRequest();
             dispatch(postcartActionreq);
-            return axios.post("http://localhost:5656/cart", data)
+            return axios.post("/cart", data)
                 .then((res) => {
                     console.log(data)
                     const postcartActionres = postcartSuccess(data);
@@ -98,7 +99,7 @@ export const addtoCart = ({ id, qty, userget }) => (dispatch) => {
         }
         else {
             console.log("s")
-            return axios.patch("http://localhost:5656/cart", data)
+            return axios.patch("/cart", data)
                 .then((res) => {
                     console.log(data)
                     if (res.data.message) {
@@ -126,7 +127,7 @@ export const addtoCart = ({ id, qty, userget }) => (dispatch) => {
 export const removecart = ({ id, userget }) => (dispatch) => {
     // console.log(id, "oi")
     const res = axios
-        .put(`http://localhost:5656/cart/removecart`, {
+        .put(`/cart/removecart`, {
             productId: id,
             userId: userget,
         })
@@ -140,7 +141,7 @@ export const removecart = ({ id, userget }) => (dispatch) => {
 
 export const deletecart = () => (dispatch) => {
     const res = axios
-        .delete(`http://localhost:5656/cart`)
+        .delete(`/cart`)
         .then(() => {
             dispatch(fetchCart())
         })

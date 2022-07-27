@@ -3,13 +3,12 @@ const express = require("express");
 const Razorpay = require("razorpay");
 
 const router = express.Router();
-// console.log(process.env.RAZORPAY_KEY_ID, process.env.RAZORPAY_SECRET)
 router.post("/", async (req, res) => {
     // console.log(req.body, "amountbak")
     try {
         const instance = new Razorpay({
-            key_id: "rzp_test_4KpG1twUj3b4p2",
-            key_secret: "OVSviQCttEfkGjrjBPxLp3Ui",
+            key_id: process.env.RAZORPAY_KEY_ID,
+            key_secret: process.env.RAZORPAY_KEY_SECRET,
         });
 
         const options = {

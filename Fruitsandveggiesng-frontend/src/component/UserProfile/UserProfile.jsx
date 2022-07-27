@@ -15,18 +15,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCart } from "../../Redux/Cart/action";
 import { fetchUser } from "../../Redux/User/action";
 import MyOrders from "./MyOrders";
-
+import { useNavigate } from "react-router-dom";
 
 export default function UserProfile() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.User.user);
   let userget = JSON.parse(localStorage.getItem("fruitaccessuser"));
-
+  let navigate = useNavigate();
   useEffect(() => {
     dispatch(fetchUser(userget._id));
   }, []);
 
   const handellogout = () => {
+    navigate("/");
     localStorage.setItem("fruitaccesstoken", JSON.stringify(""));
     localStorage.setItem("fruitaccessuser", JSON.stringify(""));
     dispatch(fetchCart());
@@ -106,7 +107,7 @@ export default function UserProfile() {
         </Box>
       </Center>
 
-      <MyOrders/>
+      <MyOrders />
     </Box>
   );
 }

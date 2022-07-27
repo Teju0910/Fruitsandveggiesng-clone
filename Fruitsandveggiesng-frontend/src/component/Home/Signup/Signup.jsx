@@ -23,7 +23,7 @@ import {
   Center,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../../../axios/axios";
 import { FaUserAlt, FaLock } from "react-icons/fa";
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
@@ -40,7 +40,7 @@ function Signup({ isOpen, onClose, cancelRef, handelhideshow }) {
 
   const submitsignup = async () => {
     axios
-      .post("http://localhost:5656/register", {
+      .post("/register", {
         name: username,
         email: email,
         mobileNumber: mobileNumber.toString(),

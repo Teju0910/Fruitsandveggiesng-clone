@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios from "../../axios/axios";
+
 
 export const UserActions = {
     GET_USER_REQUEST: "GET_USER_REQUEST",
@@ -26,7 +27,7 @@ export const fetchUser = (id) => (dispatch) => {
     dispatch(getdataActionreq);
     // console.log(`token is`, getState().auth.token);
     return axios({
-        url: `http://localhost:5656/user/${id}`,
+        url: `/user/${id}`,
         method: "GET",
     }).then((res) => {
         // console.log(res.data, "user")
@@ -48,7 +49,7 @@ export const fetchUser = (id) => (dispatch) => {
 // export const getsingleproduct = (id) => (dispatch) => {
 //     // console.log(id, "id")
 //     axios({
-//         url: `http://localhost:5656/user/${id}`,
+//         url: `/user/${id}`,
 //         method: "get",
 //     })
 //         .then((res) => {

@@ -24,7 +24,7 @@ import {
 } from "@chakra-ui/react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../../../axios/axios";
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
 
@@ -38,7 +38,7 @@ function Signin({ isOpen, onClose, cancelRef, handelhideshow }) {
 
   const submitlogin = async () => {
     axios
-      .post("http://localhost:5656/login", {
+      .post("/login", {
         email: email,
         password: password,
       })

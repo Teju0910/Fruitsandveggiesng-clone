@@ -32,9 +32,8 @@ const SingleProduct = () => {
   const [qty, setqty] = useState(1);
   const [wish, setwish] = useState(false);
   const dispatch = useDispatch();
-  let userget = JSON.parse(localStorage.getItem("fruitaccessuser"));
+  const filt = useSelector((state) => state.Filter.filter);
 
-  // console.log(singlepro, "singlepro");
   const { id } = useParams();
 
   useEffect(() => {
@@ -124,7 +123,12 @@ const SingleProduct = () => {
             >
               {pro.name}
             </Heading>
-            <Wishbtn mt={30} isfavoutite={pro.isfavoutite} id={pro.id} />
+            <Wishbtn
+              mt={30}
+              isfavoutite={pro.isfavoutite}
+              id={pro._id}
+              filter={filt}
+            />
           </Flex>
           <Heading
             color={"#35AF6A"}
@@ -179,5 +183,4 @@ const SingleProduct = () => {
     </Box>
   );
 };
-// direction={{ base: "column", md: "row" }}
 export default SingleProduct;

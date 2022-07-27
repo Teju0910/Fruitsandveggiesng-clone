@@ -13,17 +13,11 @@ export const Wishbtn = ({ isfavoutite, id, alldata, update, filter }) => {
   const [wish, setwish] = useState(isfavoutite);
   const onefruit = useSelector((state) => state.Fruits.onefruit);
   const dispatch = useDispatch();
-
+  // console.log(wish, "oi");
   useEffect(() => {
-    console.log("ue1");
-    // update();
+    // console.log("ue1");
     dispatch(getsingleproduct(id));
   }, [wish]);
-
-  // useEffect(() => {
-  //   console.log("ue2");
-  //   // update();
-  // }, [wish]);
 
   return (
     <Box zIndex="15" width="40px">

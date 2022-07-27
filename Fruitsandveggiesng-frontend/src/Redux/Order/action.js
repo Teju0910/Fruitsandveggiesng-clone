@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../axios/axios";
 
 export const OrderActions = {
     GET_ORDER_REQUEST: "GET_ORDER_REQUEST",
@@ -28,7 +28,7 @@ export const fetchOrder = (userget) => (dispatch) => {
     const getorderActionreq = getorderRequest();
     dispatch(getorderActionreq);
     return axios({
-        url: `http://localhost:5656/order/find/${userget}`,
+        url: `/order/find/${userget}`,
         method: "GET",
     })
         .then((res) => {
@@ -70,14 +70,14 @@ export const addtoOrder = ({ cart, address, amount, user }) => (dispatch) => {
         address: address,
     }
     let isUserpresent = axios({
-        url: `http://localhost:5656/order/find/${user}`,
+        url: `/order/find/${user}`,
         method: "GET",
     }).then((res) => {
         // console.log(res.data, "addtoorder")
         if (res.data) {
             const postorderActionreq = postorderRequest();
             dispatch(postorderActionreq);
-            return axios.post("http://localhost:5656/order", data)
+            return axios.post("/order", data)
                 .then((res) => {
                     const postorderActionres = postorderSuccess(data);
                     dispatch(postorderActionres);

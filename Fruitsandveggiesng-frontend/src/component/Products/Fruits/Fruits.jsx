@@ -7,12 +7,9 @@ import {
   Text,
   Center,
 } from "@chakra-ui/react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Wishbtn } from "../Wishbtn";
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { useContext, useEffect, useState } from "react";
-import { FaLessThanEqual } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 const Fruits = ({ id, name, image, price, isfavoutite, alldata, update }) => {
   const filt = useSelector((state) => state.Filter.filter);
@@ -63,6 +60,7 @@ const Fruits = ({ id, name, image, price, isfavoutite, alldata, update }) => {
               isfavoutite={isfavoutite}
               alldata={alldata}
               update={update}
+              filter={filt}
             />
             <Link to={`/products/categories=${filterfruits}/${id}`}>
               <Text as="u" ml={15} color={"blue"} _hover={{ color: "green" }}>

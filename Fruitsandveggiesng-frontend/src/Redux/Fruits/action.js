@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../axios/axios";
 
 export const FruitsActions = {
     GET_FRUITS_REQUEST: "GET_FRUITS_REQUEST",
@@ -23,18 +23,19 @@ export const getdataFailure = () => ({
 
 
 export const fetchFruits = ({ filter }) => (dispatch) => {
-    // console.log(filter, "paylos")
+    console.log(filter, "paylos")
     const getdataActionreq = getdataRequest();
     dispatch(getdataActionreq);
     // console.log(`token is`, getState().auth.token);
     if (filter != "") {
         return axios({
-            url: "http://localhost:5656/fruitsandveggies",
+            url: "/fruitsandveggies",
             method: "GET",
             params: {
                 categories: filter
             }
         }).then((res) => {
+            console.log(res.data, "res.data")
             const getdataActionres = getdataSuccess(res.data);
             dispatch(getdataActionres);
         })
@@ -45,7 +46,7 @@ export const fetchFruits = ({ filter }) => (dispatch) => {
     }
     else {
         return axios({
-            url: "http://localhost:5656/fruitsandveggies",
+            url: "/fruitsandveggies",
             method: "GET",
         }).then((res) => {
             const getdataActionres = getdataSuccess(res.data);
@@ -67,7 +68,7 @@ export const getsingledataSuccess = (data) => ({
 export const getsingleproduct = (id) => (dispatch) => {
     // console.log(id, "id")
     axios({
-        url: `http://localhost:5656/fruitsandveggies/${id}`,
+        url: `/fruitsandveggies/${id}`,
         method: "get",
     })
         .then((res) => {
@@ -81,15 +82,16 @@ export const getsingleproduct = (id) => (dispatch) => {
 
 
 
-export const updatedatawishlist = ({ id, wish,filter }) => (dispatch) => {
-    console.log(wish, "oi")
+export const updatedatawishlist = ({ id, wish, filter }) => (dispatch) => {
+    console.log(id, wish, filter, "o..i")
     axios
-        .patch(`http://localhost:5656/fruitsandveggies/${id}`, {
+        .patch(`/fruitsandveggies/${id}`, {
             isfavoutite: wish,
         })
         .then((res) => {
             // console.log(res.data, "id")
             dispatch(fetchFruits({ filter }));
+            dispatch(getsingleproduct(id));
         })
         .catch((err) => {
             console.log(err.message);
