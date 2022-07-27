@@ -1,26 +1,29 @@
 import { Flex, Grid, Stack } from "@chakra-ui/react";
 import Fruits from "./Fruits/Fruits";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import { fetchFruits } from "../../Redux/Fruits/action";
+
 import { FilterComponent } from "./FilterComponent";
 
 export default function Product() {
   const dispatch = useDispatch();
   const filt = useSelector((state) => state.Filter.filter);
   const products = useSelector((state) => state.Fruits.fruits);
+  const [pro, setpro] = useState(products);
 
   useEffect(() => {
     if (products?.length === 0) {
       update();
     }
     // update();
-  }, [dispatch, filt]);
+  }, [products?.length, dispatch, filt]);
   console.log(products, "sotrese");
 
   const update = () => {
-    // console.log("updated");
-    dispatch(fetchFruits({ filt }));
+    console.log("updated");
+    dispatch(fetchFruits({ filt, setpro }));
   };
   return (
     <Flex

@@ -4,6 +4,8 @@
   font-family: 'Lato', sans-serif;
   box-sizing: border-box;
   padding-top: 75px;
+  background-image: url("http://www.libertyseniorapartments.com/wp-content/uploads/sites/184/2019/03/www.apartmentsforus.comWhy-You-Should-Eat-More-F-00322d7185c595357a57e32890b23feb8ab8ad98.jpg");
+  background-position: center;
 }
 
 
@@ -29,7 +31,7 @@
   position: relative;
   height: 70vh;
   overflow: hidden;
-  margin-top: 50px;
+  margin-top: 37px;
 }
 
 #title{
@@ -99,16 +101,6 @@
   padding-top: 5%;
 }
 
-/* .slider-content .inner {
-  padding: 0 70px;
-  box-sizing: border-box;
-  position: absolute;
-  width: 100%;
-  /* top: 50%; */
-  /* left: 50%; */
- /* transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%); */
-/* } */ */
 
 .slider-content .inner button{
 transition-delay: 0s;
@@ -124,19 +116,7 @@ transition-delay: 0s;
   line-height: 1;
 }
 
-/* .slider-content .inner p {
-  color: #FFFFFF;
-  font-size: 14px;
-  line-height: 1.5;
-  margin: 20px auto 30px;
-  max-width: 640px;
-} */
 
-/* .slider-content section {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-} */
 
 #inner1{
   color:rgb(18, 245, 233);

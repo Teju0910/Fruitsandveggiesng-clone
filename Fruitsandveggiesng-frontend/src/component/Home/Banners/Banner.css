@@ -1,5 +1,5 @@
 .slide h1 {
-	transition: all 0.3s ease;
+	transition: all 0.4s ease;
 	-webkit-transform: translateY(-30px);
 					transform: translateY(-30px);
 	opacity: 0;
@@ -23,11 +23,11 @@
 	transition: all 0.3s ease;
 }
 
-/* .slide section img {
+.slide section img {
 	-webkit-transform: translateX(-10px);
 					transform: translateX(-10px);
 	opacity: 0;
-} */
+}
 
 .slide section span {
 	-webkit-transform: translateY(-10px);

@@ -9,7 +9,7 @@ import { connectimg, content } from "../Data/Data";
 const Banners = () => {
   return (
     <div className="Caro">
-      <Slider className="slider-wrapper" autoplay={3000}>
+      <Slider className="slider-wrapper" autoplay={3000} >
         {content.map((item, index) => (
           <div
             key={index}

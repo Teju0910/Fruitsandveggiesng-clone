@@ -110,15 +110,15 @@ const SingleProduct = () => {
           />
         </Box>
         <Box p={5} textAlign="center" justifyContent="center">
-          <Flex>
+          <Flex fontFamily="Georgia, serif">
             <Heading
               as="h1"
               // size={{ base: "xl", md: "xl", sm: "xl", xs: "xl" }}
               size="md"
-              id="title"
-              // fontFamily="cursive"
-              p={10}
-              // width={90}
+              // id="title"
+              fontFamily="Georgia, serif"
+              p={8}
+              width={600}
               textTransform={"uppercase"}
             >
               {pro.name}

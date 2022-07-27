@@ -49,6 +49,7 @@ export const fetchFruits = ({ filter }) => (dispatch) => {
             url: "/fruitsandveggies",
             method: "GET",
         }).then((res) => {
+            console.log(res.data, "res..data")
             const getdataActionres = getdataSuccess(res.data);
             dispatch(getdataActionres);
         })
@@ -81,9 +82,9 @@ export const getsingleproduct = (id) => (dispatch) => {
 };
 
 
-
 export const updatedatawishlist = ({ id, wish, filter }) => (dispatch) => {
-    console.log(id, wish, filter, "o..i")
+    console.log(id, wish, filter.filter, "o..i")
+    filter = filter.filter
     axios
         .patch(`/fruitsandveggies/${id}`, {
             isfavoutite: wish,
