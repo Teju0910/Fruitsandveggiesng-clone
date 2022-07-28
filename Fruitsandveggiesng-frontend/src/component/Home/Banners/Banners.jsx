@@ -9,7 +9,7 @@ import { connectimg, content } from "../Data/Data";
 const Banners = () => {
   return (
     <div className="Caro">
-      <Slider className="slider-wrapper" autoplay={3000} >
+      <Slider className="slider-wrapper" autoplay={3000}>
         {content.map((item, index) => (
           <div
             key={index}
@@ -21,7 +21,9 @@ const Banners = () => {
           >
             <div className="innertext">
               <h4 className="mini">{item.mini}</h4>
-              <Heading id="title">{item.title}</Heading>
+              <Heading id="title" color="#6bf7fe">
+                {item.title}
+              </Heading>
               <p id="des">{item.description}</p>
               <button className="btn1">{item.button1}</button>
               <button className="btn2">{item.button2}</button>

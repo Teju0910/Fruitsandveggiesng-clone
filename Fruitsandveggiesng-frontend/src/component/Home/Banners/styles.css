@@ -4,8 +4,6 @@
   font-family: 'Lato', sans-serif;
   box-sizing: border-box;
   padding-top: 75px;
-  background-image: url("http://www.libertyseniorapartments.com/wp-content/uploads/sites/184/2019/03/www.apartmentsforus.comWhy-You-Should-Eat-More-F-00322d7185c595357a57e32890b23feb8ab8ad98.jpg");
-  background-position: center;
 }
 
 
@@ -36,6 +34,7 @@
 
 #title{
   font-family: 'Pacifico', cursive;
+  color: #6bf7fe;
 }
 
 #des{

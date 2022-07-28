@@ -76,7 +76,7 @@ function Services() {
                   fontSize="md"
                   lineHeight="normal"
                   fontWeight="semibold"
-                  href="./fruits"
+                  href="./products"
                 >
                   <Button mt={5} variant="outline">
                     {"Explore More >>"}
@@ -124,7 +124,7 @@ function Services() {
                   fontSize="md"
                   lineHeight="normal"
                   fontWeight="semibold"
-                  href="./vegetables"
+                  href="./products"
                 >
                   <Button variant="outline">{"Explore More >>"}</Button>
                 </Link>
@@ -171,7 +171,7 @@ function Services() {
                   fontSize="md"
                   lineHeight="normal"
                   fontWeight="semibold"
-                  href="./HerbsandSpices"
+                  href="./products"
                 >
                   <Button variant="outline">{"Explore More >>"}</Button>
                 </Link>
