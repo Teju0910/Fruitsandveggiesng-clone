@@ -48,6 +48,9 @@ Password - Qwer@789
 - `Product Information Page`: Product information and add quantity and add to cart option is available here.
 ![Fruitsandveggiesng-mall](https://i.ibb.co/C66wsg1/single-fruit-page.png)
 
+- `Wishlist Page`:  Add to wish list  by double clicking on the Wishlist button
+![Fruitsandveggiesng-mall](https://i.ibb.co/r0P5yGF/wishlist.png)
+
 
 - `Booking Page`: this page for cart list and order summary.
 ![Fruitsandveggiesng-mall](https://i.ibb.co/KVJ4Yv2/cart-page.png)
