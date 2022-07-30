@@ -23,6 +23,9 @@ Fruits &amp; Veggies provides farm fresh fruits and vegetables online at the bes
 - Express
 - Node
 
+## Sample Login details
+Email Id - tvpatil330@gmail.com
+Password - Qwer@789
 
 ## Pages & Features :point_down:
 
