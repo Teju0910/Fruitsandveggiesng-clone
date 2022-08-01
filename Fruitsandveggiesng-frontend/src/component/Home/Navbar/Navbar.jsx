@@ -32,8 +32,6 @@ import { useSearchParams } from "react-router-dom";
 import { fetchFruits } from "../../../Redux/Fruits/action";
 import { getdataSuccess } from "../../../Redux/Filter/action";
 import { fetchCart } from "../../../Redux/Cart/action";
-// import { getwishlistdata } from "../../../Redux/Wishlist/action";
-// import { fetchCart } from "../../../Redux/Cart/action";
 
 const Nav = styled.div`
   top: 0;

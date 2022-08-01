@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useContext, useEffect, useState } from "react";
 import { getdataSuccess } from "../../Redux/Filter/action";
 import { fetchFruits } from "../../Redux/Fruits/action";
+
 export const FilterComponent = () => {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();

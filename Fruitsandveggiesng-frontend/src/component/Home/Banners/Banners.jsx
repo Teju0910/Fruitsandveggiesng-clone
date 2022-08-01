@@ -5,6 +5,7 @@ import "./Banner.css";
 import "./styles.css";
 import { Heading, Flex } from "@chakra-ui/react";
 import { connectimg, content } from "../Data/Data";
+import { Link } from "react-router-dom";
 
 const Banners = () => {
   return (
@@ -25,8 +26,12 @@ const Banners = () => {
                 {item.title}
               </Heading>
               <p id="des">{item.description}</p>
-              <button className="btn1">{item.button1}</button>
-              <button className="btn2">{item.button2}</button>
+              <button className="btn1">
+                <Link to="/contact">{item.button1} </Link>
+              </button>
+              <button className="btn2">
+                <Link to="/products">{item.button2} </Link>
+              </button>
             </div>
           </div>
         ))}
