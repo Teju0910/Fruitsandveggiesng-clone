@@ -3,7 +3,7 @@ const User = require("../models/user.models")
 const jwt = require('jsonwebtoken');
 // const {google} = require('googleapis');
 
-const { transporter } = require("../configs/mail");
+// const { transporter } = require("../configs/mail");
 
 const { validationResult } = require("express-validator");
 
@@ -76,7 +76,7 @@ const register = async (req, res) => {
     // return res.status(200).send({ user, token, status });
   }
   catch (err) {
-    console.log({ message: err.message })
+    console.log({ message: err.message }, "errrr")
     return res.status(400).send({ message: err.message }, "errreg");
   }
 }

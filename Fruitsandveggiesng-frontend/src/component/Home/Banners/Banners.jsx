@@ -22,9 +22,9 @@ const Banners = () => {
           >
             <div className="innertext">
               <h4 className="mini">{item.mini}</h4>
-              <Heading id="title" color="#6bf7fe">
+              <h1 id="title">
                 {item.title}
-              </Heading>
+              </h1>
               <p id="des">{item.description}</p>
               <button className="btn1">
                 <Link to="/contact">{item.button1} </Link>
@@ -46,20 +46,3 @@ const Banners = () => {
 };
 
 export default Banners;
-
-{
-  /* <Flex className="connect" gap={-10}>
-<img
-  src="https://fruitsandveggiesng.com/wp-content/uploads/2021/09/fv-instagram-logo.png"
-  alt=""
-/>
-<img
-  src="https://fruitsandveggiesng.com/wp-content/uploads/2021/09/fv-facebook-logo.png"
-  alt=""
-/>
-<img
-  src="https://fruitsandveggiesng.com/wp-content/uploads/2021/09/fv-twitter-logo.png"
-  alt=""
-/>
-</Flex> */
-}
