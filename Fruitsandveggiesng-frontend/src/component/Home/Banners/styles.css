@@ -34,7 +34,7 @@
 
 #title{
   font-family: 'Pacifico', cursive;
-  color: #6bf7fe;
+  /* color: #6bf7fe; */
 }
 
 #des{
@@ -107,7 +107,7 @@ transition-delay: 0s;
 }
 
 .slider-content .inner h1 {
-  font-weight: 900;
+  /* font-weight: 800; */
   margin: 0 auto;
   max-width: 840px;
   color: #FFFFFF;
@@ -115,21 +115,20 @@ transition-delay: 0s;
   line-height: 1;
 }
 
-
-
 #inner1{
-  color:rgb(18, 245, 233);
+  color:rgb(194, 13, 52);
 }
 
 #inner2{
   color:yellow;
 }
+
 #inner3{
   color:#ffa700
 }
 
 #inner4{
-  color:rgb(95, 250, 68)
+  color:rgb(38, 149, 18)
 }
 
 .btn1{
