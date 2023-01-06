@@ -1,0 +1,19 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: gtime
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: gtime
+  template:
+    metadata:
+      labels:
+        app: gtime
+    spec:
+      containers:
+      - name: gtime
+        image: asia-south1-docker.pkg.dev/convint-testing/tejasvini-testing/timmer:latest
+        ports:
+        - containerPort: 80
