@@ -1,0 +1,6 @@
+image:
+  repository: asia-south1-docker.pkg.dev/convint-testing/tejasvini-testing/fruitsandveggiesngfrontend 
+  tag: "prod"
+  pullPolicy: IfNotPresent
+  # pullSecrets:
+  #     - name: gcr-json-key
