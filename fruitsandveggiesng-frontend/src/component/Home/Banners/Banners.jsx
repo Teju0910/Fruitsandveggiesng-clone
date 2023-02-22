@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 const Banners = () => {
   return (
     <div className="Caro">
-      <Slider className="slider-wrapper" autoplay={3000}>
+      <Slider className="slider-wrapper" autoplay={10000}>
         {content.map((item, index) => (
           <div
             key={index}

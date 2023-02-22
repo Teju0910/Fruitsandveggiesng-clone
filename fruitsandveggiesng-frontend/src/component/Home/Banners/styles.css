@@ -103,7 +103,7 @@
 
 .slider-content .inner button{
 transition-delay: 0s;
-          transition-delay: 0s;
+transition-delay: 0s;
 }
 
 .slider-content .inner h1 {
@@ -116,7 +116,7 @@ transition-delay: 0s;
 }
 
 #inner1{
-  color:rgb(194, 13, 52);
+  color:rgb(34, 194, 13);
 }
 
 #inner2{
@@ -211,15 +211,15 @@ padding: 2% 5%;
   display: block;
 }
 
-@media (max-height: 500px) {
+@media (max-height: 70vh) {
   .slider-wrapper, .slide {
     height: calc(100vh - 75px);
   }    
 }
 
-@media (max-width: 640px) {
+@media (max-width: 70vh) {
   .slider-wrapper, .slide {
-    height: calc(80vh - 75px);
+      height: calc(100vh - 75px);
   }    
 }
 
